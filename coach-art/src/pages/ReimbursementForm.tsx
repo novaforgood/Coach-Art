@@ -8,12 +8,14 @@ import Typography from '@mui/material/Typography';
 const ReimbursementForm: React.FC = () => {
   const [receiptCount, setReceiptCount] = useState(1);
   const [activeReceiptIndex, setActiveReceiptIndex] = useState(1);
+  const [formData, setFormData] = useState<Array<any>>([{}]);
 
   const receiptCountArray = Array.from({ length: receiptCount }, (_, index) => index);
 
   const handleAddReceipt = () => {
     setReceiptCount(receiptCount + 1);
     setActiveReceiptIndex(receiptCount + 1);
+    setFormData([...formData, {}]);
     console.log(receiptCount + 1);
   };
 
@@ -21,6 +23,13 @@ const ReimbursementForm: React.FC = () => {
     setActiveReceiptIndex(index + 1);
     console.log(index + 1);
   };
+
+  const handleFormChange = (index, newData) => {
+    const updatedFormData = [...formData];
+    updatedFormData[index] = newData;
+    setFormData(updatedFormData);
+    console.log(formData[activeReceiptIndex]);
+  }
 
   return (
     <Box>
@@ -37,11 +46,16 @@ const ReimbursementForm: React.FC = () => {
         <Box sx={{display: 'flex', flexDirection: 'row'}}>
           {receiptCountArray.map((index) => (
             <Box key={index} sx={{ marginLeft: index === 0 ? '3%' : '0'}}>
-              <ReceiptCount label="Receipt" index={index} onClick={handleChangeReceipt}/>
+              <ReceiptCount label="Receipt" index={index} activeIndex={activeReceiptIndex} onClick={handleChangeReceipt}/>
             </Box>
           ))}
         </Box>
-        <FormComponent />
+        {/* <FormComponent data={formData[activeReceiptIndex] || {}} onDataChange={(newData) => handleFormChange(activeReceiptIndex, newData)} /> */}
+        <FormComponent
+          key={activeReceiptIndex} // Add key prop to force rerender when activeReceiptIndex changes
+          data={formData[activeReceiptIndex] || {}}
+          onDataChange={(newData) => handleFormChange(activeReceiptIndex, newData)}
+        />
       </Box>
       <Button sx={{textTransform: 'none'}} onClick={handleAddReceipt}>Add Receipt</Button>
     </Box>

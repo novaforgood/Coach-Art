@@ -4,26 +4,30 @@ import { Button, Typography, Box } from '@mui/material';
 import DropdownSelect from '../components/Dropdown.tsx';
 import TextInput from './TextInput.tsx';
 
-const FormComponent = () => {
-  const [expenseCategory, setExpenseCategory] = useState('');
-  const [activityCategory, setActivityCategory] = useState('');
-  const [itemsPurchasedDescription, setItemsPurchasedDescription] = useState('');
-  const [textInputValue, setTextInputValue] = useState('');
+const FormComponent = ({ data, onDataChange }) => {
+  const [expenseCategory, setExpenseCategory] = useState(data.expenseCategory || '');
+  const [activityCategory, setActivityCategory] = useState(data.activityCategory || '');
+  const [itemsPurchasedDescription, setItemsPurchasedDescription] = useState(data.itemsPurchasedDescription || '');
+  const [textInputValue, setTextInputValue] = useState(data.additionalInformation || '');
 
   const handleExpenseCategoryChange = (event) => {
     setExpenseCategory(event.target.value);
+    onDataChange({ ...data, expenseCategory: event.target.value });
   };
 
   const handleActivityCategoryChange = (event) => {
     setActivityCategory(event.target.value);
+    onDataChange({ ...data, activityCategory: event.target.value });
   };
 
   const handleItemsPurchasedChange = (event) => {
     setItemsPurchasedDescription(event.target.value);
+    onDataChange({ ...data, itemsPurchasedDescription: event.target.value });
   };
 
   const handleTextInputChange = (event) => {
     setTextInputValue(event.target.value);
+    onDataChange({ ...data, additionalInformation: event.target.value });
   };
 
   const expenseCategoryOptions = [
