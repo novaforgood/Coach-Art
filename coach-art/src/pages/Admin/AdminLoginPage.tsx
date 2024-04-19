@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Box, Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import AdminPortal from '../components/AdminLogin/AdminPortal.tsx';
+import AdminPortal from '../../components/AdminLogin/AdminPortal.tsx';
 
 const AdminLoginPage: React.FC = () => {
   // const [username, setUsername] = useState('');

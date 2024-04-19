@@ -8,11 +8,9 @@ const AdminPortal = () => {
   const [password, setPassword] = useState('');
 
   const handleUsernameChange = (event) => {
-    console.log(event.target.value);
     setUsername(event.target.value);
   }
   const handlePasswordChange = (event) => {
-    console.log(event.target.value);
     setPassword(event.target.value);
   }
   
