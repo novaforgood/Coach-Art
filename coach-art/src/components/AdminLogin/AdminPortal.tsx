@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Box, TextField, Button, Link } from '@mui/material';
+import TextInput from '../TextInput.tsx';
 import Typography from '@mui/material/Typography';
 
 const AdminPortal = () => {
@@ -82,7 +83,7 @@ const AdminPortal = () => {
                 textTransform: 'none', padding: '4%', marginBottom: '3%', marginTop: '5%', backgroundColor: '#5c5e60', borderColor: 'black'
                 }}
             >
-                <Link href="/admin/dashboard" // TODO: rename/update
+                <Link href="/admin/home" // TODO: rename/update
                 underline='none' color="inherit"
                 >
                     <Typography fontSize="20px" fontWeight="200" lineHeight={1.5} align='center' color="white">Sign In</Typography>
