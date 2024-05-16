@@ -42,12 +42,10 @@ const AdminPortal = () => {
       >
         <Typography fontSize="30px" fontWeight="600" lineHeight={1.5} align='center'>Admin Portal</Typography>
       </Box>
-
         <Box
             sx={{
             display: 'flex',
             flexDirection: 'column',
-            // maxWidth: '2000px',
             width: '500px',
             justifyContent: 'center',
             alignItems: 'center',
