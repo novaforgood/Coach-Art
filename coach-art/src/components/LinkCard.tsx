@@ -2,14 +2,13 @@ import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import styled from "@emotion/styled";
 
-interface ReceiptCardProps {
-  receipt: {
+interface LinkCardProps {
+  link: {
     id: number;
     total: number;
-    expense: string;
-    activity: string;
-    item: string;
-    additional: string;
+    name: string;
+    link: string;
+    comment: string;
   };
 }
 
@@ -17,7 +16,7 @@ const ListItem = styled.li`
   margin-top: 12px;
 `;
 
-const ReceiptCard: React.FC<ReceiptCardProps> = ({ receipt }) => {
+const LinkCard: React.FC<LinkCardProps> = ({ link }) => {
   const cardStyle = {
     padding: "20px",
     marginBottom: "50px",
@@ -78,32 +77,26 @@ const ReceiptCard: React.FC<ReceiptCardProps> = ({ receipt }) => {
         />
         <div style={{ flexGrow: 1 }}>
           <div style={titleStyle}>
-            <Typography style={h2}>Receipt {receipt.id}</Typography>
-            <Typography style={h2}>${receipt.total.toFixed(2)}</Typography>
+            <Typography style={h2}>Receipt {link.id}</Typography>
+            <Typography style={h2}>${link.total.toFixed(2)}</Typography>
           </div>
           <ul style={listStyle}>
             <ListItem>
               <Typography>
                 <b>Expense Category: </b>
-                {receipt.expense}
+                {link.name}
               </Typography>
             </ListItem>
             <ListItem>
               <Typography>
                 <b>Activity Category: </b>
-                {receipt.activity}
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <Typography>
-                <b>Item Description: </b>
-                {receipt.item}
+                {link.link}
               </Typography>
             </ListItem>
             <ListItem>
               <Typography>
                 <b>Additional Category: </b>
-                {receipt.additional}
+                {link.comment}
               </Typography>
             </ListItem>
           </ul>
@@ -115,4 +108,4 @@ const ReceiptCard: React.FC<ReceiptCardProps> = ({ receipt }) => {
   );
 };
 
-export default ReceiptCard;
+export default LinkCard;

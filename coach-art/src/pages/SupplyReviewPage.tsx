@@ -1,50 +1,39 @@
 import React from "react";
-import ReceiptCard from "../components/ReceiptCard.tsx";
-import ReimbursementDetails from "../components/ReimbursementDetails.tsx";
 import { Box, Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import LinkCard from "../components/LinkCard.tsx";
+import SupplyDetails from "../components/SupplyDetails.tsx";
 
-const ReimbursementReview: React.FC = () => {
-  const receipts = [
+const SupplyReview: React.FC = () => {
+  const links = [
     {
       id: 1,
       total: 100.02,
-      expense: "Expense #1",
-      activity: "Activity #1",
-      item: "Sock",
-      additional: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+      name: "KINSPORY Deluxe Art Supplies Kit for Kids, Bahahaha",
+      link: "https://www.amazon.com/KINSPORY-Portable-Childrens-Coloring-Activity/dp/B08X4ZQZ3Z",
+      comment:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt massa non dolor posuere, non molestie sem porttitor. Integer eros urna, ullamcorper at leo ut, vestibulum gravida ligula. Praesent non.",
     },
     {
       id: 2,
-      total: 122.33,
-      expense: "Expense #1",
-      activity: "Activity #1",
-      item: "Shoe",
-      additional: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+      total: 100.02,
+      name: "KINSPORY Deluxe Art Supplies Kit for Kids, Bahahaha",
+      link: "https://www.amazon.com/KINSPORY-Portable-Childrens-Coloring-Activity/dp/B08X4ZQZ3Z",
+      comment:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt massa non dolor posuere, non molestie sem porttitor. Integer eros urna, ullamcorper at leo ut, vestibulum gravida ligula. Praesent non.",
     },
     {
       id: 3,
-      total: 100.0,
-      expense: "Expense #1",
-      activity: "Activity #1",
-      item: "Glove",
-      additional: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-    },
-    {
-      id: 4,
-      total: 100.99,
-      expense: "Expense #1",
-      activity: "Activity #1",
-      item: "Mitten",
-      additional: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+      total: 100.02,
+      name: "KINSPORY Deluxe Art Supplies Kit for Kids, Bahahaha",
+      link: "https://www.amazon.com/KINSPORY-Portable-Childrens-Coloring-Activity/dp/B08X4ZQZ3Z",
+      comment:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tincidunt massa non dolor posuere, non molestie sem porttitor. Integer eros urna, ullamcorper at leo ut, vestibulum gravida ligula. Praesent non.",
     },
   ];
 
-  const grandTotal = receipts.reduce(
-    (total, receipt) => total + receipt.total,
-    0
-  );
-  const numReceipts = receipts.length;
+  const grandTotal = links.reduce((total, link) => total + link.total, 0);
+  const numLinks = links.length;
 
   const h2 = {
     fontSize: "24px",
@@ -97,11 +86,11 @@ const ReimbursementReview: React.FC = () => {
           fontWeight: "700",
         }}
       >
-        Reimbursement Form Review
+        Supply Request Review
       </Typography>
-      <Button style={editButton}>
+      <Button sx={editButton}>
         <ArrowBackIcon style={{ fontSize: "20px", fontWeight: "400" }} /> Edit
-        Receipts
+        Links
       </Button>
       <Box style={{ display: "flex" }}>
         <Box style={{ width: "70%" }}>
@@ -115,8 +104,8 @@ const ReimbursementReview: React.FC = () => {
               marginRight: "50px",
             }}
           >
-            {receipts.map((receipt) => (
-              <ReceiptCard key={receipt.id} receipt={receipt} />
+            {links.map((link) => (
+              <LinkCard key={link.id} link={link} />
             ))}
           </Box>
         </Box>
@@ -126,13 +115,13 @@ const ReimbursementReview: React.FC = () => {
               <b> Grand Total: </b> ${grandTotal.toFixed(2)}
             </Typography>
             <Typography style={p}>
-              <i>{numReceipts} Receipts</i>
+              <i>{numLinks} Receipts</i>
             </Typography>
           </Box>
           <Typography style={p}>
             <b>Date: </b> MM/DD/YY
           </Typography>
-          <ReimbursementDetails
+          <SupplyDetails
             reimbursement={{
               name: "John Doe",
               email: "john@gmail.com",
@@ -140,12 +129,11 @@ const ReimbursementReview: React.FC = () => {
               zip: "22042",
               city: "Falls Church",
               state: "VA",
-              paymentMethod: "paperCheck",
             }}
           />
           <Box style={{ display: "flex" }}>
-            <Button style={submitButton}>Submit Receipt(s)</Button>
-            <Button style={editDetailButton}>Edit Details</Button>
+            <Button sx={submitButton}>Submit Receipt(s)</Button>
+            <Button sx={editDetailButton}>Edit Links</Button>
           </Box>
         </Box>
       </Box>
@@ -153,4 +141,4 @@ const ReimbursementReview: React.FC = () => {
   );
 };
 
-export default ReimbursementReview;
+export default SupplyReview;
