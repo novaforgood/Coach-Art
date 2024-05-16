@@ -1,8 +1,11 @@
 import React from "react";
 import { Box, Typography, Button, AppBar, Toolbar, Stack } from "@mui/material";
 import FormInstr from "../components/FormInstr.tsx";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <AppBar position="static" color="transparent">
@@ -14,7 +17,13 @@ const LandingPage: React.FC = () => {
             <Button style={{ backgroundColor: "#b3b3b3" }} variant="contained">
               admin signup
             </Button>
-            <Button style={{ backgroundColor: "#b3b3b3" }} variant="contained">
+            <Button
+              style={{ backgroundColor: "#b3b3b3" }}
+              variant="contained"
+              onClick={() => {
+                navigate("/admin");
+              }}
+            >
               admin login
             </Button>
           </Stack>
