@@ -7,6 +7,7 @@ import AdminLoginPage from './pages/Admin/AdminLoginPage.tsx';
 import AdminDashboardPage from './pages/Admin/AdminDashboardPage.tsx'
 import ResetPasswordPage from './pages/ResetPasswordPage.tsx';
 import ReimbursementReview from "./pages/ReimbursementReviewPage.tsx";
+import SupplyReview from "./pages/SupplyReviewPage.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
 
 const App: React.FC = () => {
@@ -20,6 +21,7 @@ const App: React.FC = () => {
         <Route path="/admin/home" Component={AdminDashboardPage} />
         <Route path="/admin/resetpassword" Component={ResetPasswordPage} />
         <Route path="/review" Component={ReimbursementReview} />
+        <Route path="/supply-review" Component={SupplyReview} />
         <Route path="/landing-page" Component={LandingPage} />
       </Routes>
     </Router>
