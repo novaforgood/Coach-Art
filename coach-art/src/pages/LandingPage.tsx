@@ -1,25 +1,13 @@
 import React from "react";
 import { Box, Typography, Button, AppBar, Toolbar, Stack } from "@mui/material";
 import FormInstr from "../components/FormInstr.tsx";
+import Header from "../components/Header.tsx";
+import "../styles/global.css";
 
 const LandingPage: React.FC = () => {
   return (
     <>
-      <AppBar position="static" color="transparent">
-        <Toolbar>
-          <Typography variant="h6" component="div" flexGrow={1}>
-            CoachArt Volunteer Portal
-          </Typography>
-          <Stack spacing={2} direction="row">
-            <Button style={{ backgroundColor: "#b3b3b3" }} variant="contained">
-              admin signup
-            </Button>
-            <Button style={{ backgroundColor: "#b3b3b3" }} variant="contained">
-              admin login
-            </Button>
-          </Stack>
-        </Toolbar>
-      </AppBar>
+      <Header></Header>
       <Box
         display="flex"
         flexDirection="column"
