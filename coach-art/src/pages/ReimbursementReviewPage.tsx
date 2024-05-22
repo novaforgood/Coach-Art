@@ -1,8 +1,10 @@
 import React from "react";
-import ReceiptCard from "../components/ReceiptCard.tsx";
-import ReimbursementDetails from "../components/ReimbursementDetails.tsx";
+import ReceiptCard from "../components/ReimbursementForm/ReceiptCard.tsx";
+import ReimbursementDetails from "../components/ReimbursementForm/ReimbursementDetails.tsx";
 import { Box, Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Header from "../components/Header.tsx";
+import "../styles/global.css";
 
 const ReimbursementReview: React.FC = () => {
   const receipts = [
@@ -90,62 +92,65 @@ const ReimbursementReview: React.FC = () => {
   };
 
   return (
-    <Box style={{ margin: 100, marginTop: 80 }}>
-      <Typography
-        style={{
-          fontSize: "36px",
-          fontWeight: "700",
-        }}
-      >
-        Reimbursement Form Review
-      </Typography>
-      <Button style={editButton}>
-        <ArrowBackIcon style={{ fontSize: "20px", fontWeight: "400" }} /> Edit
-        Receipts
-      </Button>
-      <Box style={{ display: "flex" }}>
-        <Box style={{ width: "70%" }}>
-          <Box
-            sx={{
-              height: "90vh",
-              width: "auto",
-              overflowY: "auto",
-              paddingLeft: 2,
-              paddingRight: 2,
-              marginRight: "50px",
-            }}
-          >
-            {receipts.map((receipt) => (
-              <ReceiptCard key={receipt.id} receipt={receipt} />
-            ))}
+    <Box className="outer-box">
+      <Header></Header>
+      <Box style={{ margin: 100 }}>
+        <Typography
+          style={{
+            fontSize: "36px",
+            fontWeight: "700",
+          }}
+        >
+          Reimbursement Form Review
+        </Typography>
+        <Button sx={editButton}>
+          <ArrowBackIcon style={{ fontSize: "20px", fontWeight: "400" }} /> Edit
+          Receipts
+        </Button>
+        <Box style={{ display: "flex" }}>
+          <Box style={{ width: "70%" }}>
+            <Box
+              sx={{
+                height: "90vh",
+                width: "auto",
+                overflowY: "auto",
+                paddingLeft: 2,
+                paddingRight: 2,
+                marginRight: "50px",
+              }}
+            >
+              {receipts.map((receipt) => (
+                <ReceiptCard key={receipt.id} receipt={receipt} />
+              ))}
+            </Box>
           </Box>
-        </Box>
-        <Box sx={{ width: "400px" }}>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography style={h2}>
-              <b> Grand Total: </b> ${grandTotal.toFixed(2)}
-            </Typography>
+          <Box sx={{ width: "400px" }}>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography style={h2}>
+                <b> Grand Total: </b> ${grandTotal.toFixed(2)}
+              </Typography>
+              <Typography style={p}>
+                <i>{numReceipts} Receipts</i>
+              </Typography>
+            </Box>
             <Typography style={p}>
-              <i>{numReceipts} Receipts</i>
+              <b>Date: </b> MM/DD/YY
             </Typography>
-          </Box>
-          <Typography style={p}>
-            <b>Date: </b> MM/DD/YY
-          </Typography>
-          <ReimbursementDetails
-            reimbursement={{
-              name: "John Doe",
-              email: "john@gmail.com",
-              streetAddress: "51 Ashford Drive",
-              zip: "22042",
-              city: "Falls Church",
-              state: "VA",
-              paymentMethod: "paperCheck",
-            }}
-          />
-          <Box style={{ display: "flex" }}>
-            <Button style={submitButton}>Submit Receipt(s)</Button>
-            <Button style={editDetailButton}>Edit Details</Button>
+            <ReimbursementDetails
+              reimbursement={{
+                name: "John Doe",
+                email: "john@gmail.com",
+                streetAddress: "51 Ashford Drive",
+                zip: "22042",
+                city: "Falls Church",
+                state: "VA",
+                paymentMethod: "paperCheck",
+              }}
+            />
+            <Box style={{ display: "flex" }}>
+              <Button sx={submitButton}>Submit Receipt(s)</Button>
+              <Button sx={editDetailButton}>Edit Details</Button>
+            </Box>
           </Box>
         </Box>
       </Box>

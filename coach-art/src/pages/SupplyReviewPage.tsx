@@ -1,8 +1,9 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import LinkCard from "../components/LinkCard.tsx";
-import SupplyDetails from "../components/SupplyDetails.tsx";
+import LinkCard from "../components/SupplyForm/LinkCard.tsx";
+import SupplyDetails from "../components/SupplyForm/SupplyDetails.tsx";
+import Header from "../components/Header.tsx";
 
 const SupplyReview: React.FC = () => {
   const links = [
@@ -79,65 +80,68 @@ const SupplyReview: React.FC = () => {
   };
 
   return (
-    <Box style={{ margin: 100, marginTop: 80 }}>
-      <Typography
-        style={{
-          fontSize: "36px",
-          fontWeight: "700",
-        }}
-      >
-        Supply Request Review
-      </Typography>
-      <Button sx={editButton}>
-        <ArrowBackIcon style={{ fontSize: "20px", fontWeight: "400" }} /> Edit
-        Links
-      </Button>
-      <Box style={{ display: "flex" }}>
-        <Box style={{ width: "70%" }}>
-          <Box
-            sx={{
-              height: "90vh",
-              width: "auto",
-              overflowY: "auto",
-              paddingLeft: 2,
-              paddingRight: 2,
-              marginRight: "50px",
-            }}
-          >
-            {links.map((link) => (
-              <LinkCard key={link.id} link={link} />
-            ))}
+    <>
+      <Header></Header>
+      <Box style={{ margin: 100, marginTop: 80 }}>
+        <Typography
+          style={{
+            fontSize: "36px",
+            fontWeight: "700",
+          }}
+        >
+          Supply Request Review
+        </Typography>
+        <Button sx={editButton}>
+          <ArrowBackIcon style={{ fontSize: "20px", fontWeight: "400" }} /> Edit
+          Links
+        </Button>
+        <Box style={{ display: "flex" }}>
+          <Box style={{ width: "70%" }}>
+            <Box
+              sx={{
+                height: "90vh",
+                width: "auto",
+                overflowY: "auto",
+                paddingLeft: 2,
+                paddingRight: 2,
+                marginRight: "50px",
+              }}
+            >
+              {links.map((link) => (
+                <LinkCard key={link.id} link={link} />
+              ))}
+            </Box>
           </Box>
-        </Box>
-        <Box sx={{ width: "400px" }}>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography style={h2}>
-              <b> Grand Total: </b> ${grandTotal.toFixed(2)}
-            </Typography>
+          <Box sx={{ width: "400px" }}>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography style={h2}>
+                <b> Grand Total: </b> ${grandTotal.toFixed(2)}
+              </Typography>
+              <Typography style={p}>
+                <i>{numLinks} Receipts</i>
+              </Typography>
+            </Box>
             <Typography style={p}>
-              <i>{numLinks} Receipts</i>
+              <b>Date: </b> MM/DD/YY
             </Typography>
-          </Box>
-          <Typography style={p}>
-            <b>Date: </b> MM/DD/YY
-          </Typography>
-          <SupplyDetails
-            reimbursement={{
-              name: "John Doe",
-              email: "john@gmail.com",
-              streetAddress: "51 Ashford Drive",
-              zip: "22042",
-              city: "Falls Church",
-              state: "VA",
-            }}
-          />
-          <Box style={{ display: "flex" }}>
-            <Button sx={submitButton}>Submit Receipt(s)</Button>
-            <Button sx={editDetailButton}>Edit Links</Button>
+            <SupplyDetails
+              reimbursement={{
+                name: "John Doe",
+                email: "john@gmail.com",
+                streetAddress: "51 Ashford Drive",
+                zip: "22042",
+                city: "Falls Church",
+                state: "VA",
+              }}
+            />
+            <Box style={{ display: "flex" }}>
+              <Button sx={submitButton}>Submit Receipt(s)</Button>
+              <Button sx={editDetailButton}>Edit Links</Button>
+            </Box>
           </Box>
         </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 

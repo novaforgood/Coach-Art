@@ -5,7 +5,6 @@ import { MenuItem } from "@mui/material";
 import { InputLabel } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
-
 import styled from "@emotion/styled";
 
 interface SupplyDetailsProps {
