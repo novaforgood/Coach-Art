@@ -2,16 +2,53 @@ import React, { useState } from "react";
 import { Box, TextField, Button, Link } from "@mui/material";
 import TextInput from "../TextInput.tsx";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
-const AdminPortal = () => {
+const AdminSignup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value);
+  };
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value);
+  };
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+  };
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+  };
+
+  const allFieldsValid =
+    firstName &&
+    lastName &&
+    password &&
+    confirmPassword &&
+    email &&
+    username &&
+    password === confirmPassword;
+
+  const navigate = useNavigate();
+
+  const linkDestination = allFieldsValid ? "/admin/home" : "/admin/signup";
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (allFieldsValid) {
+      navigate("/admin/home");
+    }
   };
 
   return (
@@ -46,7 +83,7 @@ const AdminPortal = () => {
           lineHeight={1.5}
           align="center"
         >
-          Admin Portal Log In
+          Admin Portal Sign Up
         </Typography>
       </Box>
       <Box
@@ -60,6 +97,33 @@ const AdminPortal = () => {
           marginBottom: "3%",
         }}
       >
+        <TextField
+          hiddenLabel
+          variant="filled"
+          margin="normal"
+          size="small"
+          placeholder="First Name"
+          fullWidth
+          onChange={handleFirstNameChange}
+        />
+        <TextField
+          hiddenLabel
+          variant="filled"
+          margin="normal"
+          size="small"
+          placeholder="Last Name"
+          fullWidth
+          onChange={handleLastNameChange}
+        />
+        <TextField
+          hiddenLabel
+          variant="filled"
+          margin="normal"
+          size="small"
+          placeholder="Email"
+          fullWidth
+          onChange={handleEmailChange}
+        />
         <TextField
           hiddenLabel
           variant="filled"
@@ -79,26 +143,21 @@ const AdminPortal = () => {
           fullWidth
           type="password" // hides password text
         />
-        <Link
-          href="/admin/resetpassword" // TODO: rename/update
-          underline="always"
-          color="inherit"
-        >
-          <Typography
-            fontSize="10px"
-            fontWeight="100"
-            lineHeight={1.5}
-            align="center"
-            color="black"
-          >
-            Forgot Password?
-          </Typography>
-        </Link>
+        <TextField
+          hiddenLabel
+          variant="filled"
+          margin="normal"
+          size="small"
+          placeholder="Confirm Password"
+          onChange={handleConfirmPasswordChange}
+          fullWidth
+          type="password" // hides password text
+        />
         <Button
           variant="text"
           sx={{
             width: "30%",
-            height: "20%",
+            height: "10%",
             fontSize: "1.5rem",
             borderRadius: "5px",
             borderWidth: "2px",
@@ -112,11 +171,7 @@ const AdminPortal = () => {
             borderColor: "black",
           }}
         >
-          <Link
-            href="/admin/home" // TODO: rename/update
-            underline="none"
-            color="inherit"
-          >
+          <Link href={linkDestination} underline="none" color="inherit">
             <Typography
               fontSize="20px"
               fontWeight="200"
@@ -124,13 +179,28 @@ const AdminPortal = () => {
               align="center"
               color="white"
             >
-              Sign In
+              Sign Up
             </Typography>
           </Link>
         </Button>
+        <Link
+          href="/admin" //navigates to admin login
+          underline="always"
+          color="inherit"
+        >
+          <Typography
+            fontSize="10px"
+            fontWeight="100"
+            lineHeight={1.5}
+            align="center"
+            color="black"
+          >
+            Already have an account? Login
+          </Typography>
+        </Link>
       </Box>
     </Box>
   );
 };
 
-export default AdminPortal;
+export default AdminSignup;

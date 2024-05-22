@@ -14,7 +14,13 @@ const LandingPage: React.FC = () => {
             CoachArt Volunteer Portal
           </Typography>
           <Stack spacing={2} direction="row">
-            <Button style={{ backgroundColor: "#b3b3b3" }} variant="contained">
+            <Button
+              style={{ backgroundColor: "#b3b3b3" }}
+              variant="contained"
+              onClick={() => {
+                navigate("/admin/signup");
+              }}
+            >
               admin signup
             </Button>
             <Button
