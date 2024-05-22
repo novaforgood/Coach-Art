@@ -9,14 +9,14 @@ import { getDatabase, ref, set, get } from "firebase/database";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 //protect this later on
 const firebaseConfig = {
-  apiKey: "AIzaSyA-VDIvAN6243HECBhJFFdiovuT2ucSbt4",
-  authDomain: "coachart-4d202.firebaseapp.com",
-  projectId: "coachart-4d202",
-  storageBucket: "coachart-4d202.appspot.com",
-  messagingSenderId: "772850122813",
-  appId: "1:772850122813:web:0046ae63c010d7e60e2a54",
-  measurementId: "G-0DVFVPYYBW",
-  databaseURL: "https://coachart-4d202-default-rtdb.firebaseio.com",
+  apiKey: "AIzaSyBAd_Dh9lgjkyli_7mMaCzCVVNoEO2BrjU",
+  authDomain: "coach-art.firebaseapp.com",
+  projectId: "coach-art",
+  storageBucket: "coach-art.appspot.com",
+  messagingSenderId: "216034756869",
+  appId: "1:216034756869:web:4a65d9b7154e3a4c4acf6c",
+  measurementId: "G-JS8EF3YCB4", //add database url !!
+  databaseURL: "https://coach-art-default-rtdb.firebaseio.com",
 };
 
 // Initialize Firebase
