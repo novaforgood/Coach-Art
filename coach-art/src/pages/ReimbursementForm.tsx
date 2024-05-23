@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
-import { write } from "../firebase.tsx";
 import FormComponent from "../components/ReimbursementForm/FormComponent.tsx";
 import ReceiptCount from "../components/ReimbursementForm/ReceiptCount.tsx";
 import Typography from "@mui/material/Typography";
@@ -73,7 +72,7 @@ const ReimbursementForm: React.FC = () => {
     console.log(formData[activeReceiptIndex]);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     const receiptData = {
       receipts: formData.reduce((acc, receipt) => {
         acc[receipt.id] = receipt; //need id
@@ -81,15 +80,7 @@ const ReimbursementForm: React.FC = () => {
       }, {}),
     };
 
-    try {
-      write("reimbursementRequests/" + userData.id, {
-        userData,
-        receiptData,
-      });
-      navigate("/review", { state: { userData, receiptData } });
-    } catch (error) {
-      console.error("Write to firebase failed: ", error);
-    }
+    navigate("/review", { state: { userData, receiptData } });
   };
 
   return (
