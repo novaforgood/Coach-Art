@@ -1,10 +1,12 @@
 // ReimbursementForm.tsx
 import React, { useState } from "react";
 import { Box, Button } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import FormComponent from "../components/ReimbursementForm/FormComponent.tsx";
 import ReceiptCount from "../components/ReimbursementForm/ReceiptCount.tsx";
 import Typography from "@mui/material/Typography";
 import Header from "../components/Header.tsx";
+import UserInfo from "../components/ReimbursementForm/UserInfo.tsx";
 
 const ReimbursementForm: React.FC = () => {
   const [receiptCount, setReceiptCount] = useState(1);
@@ -66,6 +68,11 @@ const ReimbursementForm: React.FC = () => {
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Semper
             quis lectus nulla at volutpat diam ut venenatis tellus.
           </Typography>
+
+          {/**INSERT COMPONENT OF USER INFO LIKE NAME ADDRESS ETC */}
+          <Box sx={{ marginTop: "1%" }}>
+            <UserInfo />
+          </Box>
         </Box>
         <Box sx={{ marginTop: "1%" }}>
           <Box sx={{ display: "flex", flexDirection: "row" }}>
@@ -92,6 +99,7 @@ const ReimbursementForm: React.FC = () => {
         <Button sx={{ textTransform: "none" }} onClick={handleAddReceipt}>
           Add Receipt
         </Button>
+        <Button sx={{ textTransform: "none" }}>Review</Button>
       </Box>
     </>
   );

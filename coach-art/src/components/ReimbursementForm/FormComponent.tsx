@@ -89,6 +89,12 @@ const FormComponent = ({ data, onDataChange }) => {
         }}
       >
         Upload Receipt
+        <input
+          type="file"
+          hidden
+          //onChange={onFileChange}
+          accept="image/x-png,image/jpg,image/jpeg"
+        />
       </Button>
       <Box
         id="hello"
