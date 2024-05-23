@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import ReceiptCard from "../components/ReimbursementForm/ReceiptCard.tsx";
 import ReimbursementDetails from "../components/ReimbursementForm/ReimbursementDetails.tsx";
 import { Box, Typography, Button } from "@mui/material";
@@ -7,6 +8,9 @@ import Header from "../components/Header.tsx";
 import "../styles/global.css";
 
 const ReimbursementReview: React.FC = () => {
+  const location = useLocation();
+  const { userData, receiptData } = location.state;
+
   const receipts = [
     {
       id: 1,
@@ -119,9 +123,25 @@ const ReimbursementReview: React.FC = () => {
                 marginRight: "50px",
               }}
             >
-              {receipts.map((receipt) => (
-                <ReceiptCard key={receipt.id} receipt={receipt} />
-              ))}
+              {Object.values(receiptData.receipts).map(
+                (receipt: any, index) => (
+                  <Box key={receipt.id} sx={{ marginBottom: "16px" }}>
+                    <Typography>Receipt {index + 1}</Typography>
+                    <Typography>
+                      Expense Category: {receipt.expenseCategory}
+                    </Typography>
+                    <Typography>
+                      Activity Category: {receipt.activityCategory}
+                    </Typography>
+                    <Typography>
+                      Items Purchased: {receipt.itemsPurchasedDescription}
+                    </Typography>
+                    <Typography>
+                      Additional Information: {receipt.additionalInformation}
+                    </Typography>
+                  </Box>
+                )
+              )}
             </Box>
           </Box>
           <Box sx={{ width: "400px" }}>
