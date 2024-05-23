@@ -4,20 +4,21 @@ import styled from "@emotion/styled";
 
 interface ReceiptCardProps {
   receipt: {
-    id: number;
-    total: number;
-    expense: string;
-    activity: string;
-    item: string;
-    additional: string;
+    id: string;
+    cost: number;
+    expenseCategory: string;
+    activityCategory: string;
+    itemsPurchasedDescription: string;
+    additionalInformation: string;
   };
+  receiptNum;
 }
 
 const ListItem = styled.li`
   margin-top: 12px;
 `;
 
-const ReceiptCard: React.FC<ReceiptCardProps> = ({ receipt }) => {
+const ReceiptCard: React.FC<ReceiptCardProps> = ({ receipt, receiptNum }) => {
   const cardStyle = {
     padding: "20px",
     marginBottom: "50px",
@@ -78,32 +79,34 @@ const ReceiptCard: React.FC<ReceiptCardProps> = ({ receipt }) => {
         />
         <div style={{ flexGrow: 1 }}>
           <div style={titleStyle}>
-            <Typography style={h2}>Receipt {receipt.id}</Typography>
-            <Typography style={h2}>${receipt.total.toFixed(2)}</Typography>
+            <Typography style={h2}>Receipt {receiptNum}</Typography>
+            <Typography style={h2}>
+              ${Number(receipt.cost).toFixed(2)}
+            </Typography>
           </div>
           <ul style={listStyle}>
             <ListItem>
               <Typography>
                 <b>Expense Category: </b>
-                {receipt.expense}
+                {receipt.expenseCategory}
               </Typography>
             </ListItem>
             <ListItem>
               <Typography>
                 <b>Activity Category: </b>
-                {receipt.activity}
+                {receipt.activityCategory}
               </Typography>
             </ListItem>
             <ListItem>
               <Typography>
                 <b>Item Description: </b>
-                {receipt.item}
+                {receipt.itemsPurchasedDescription}
               </Typography>
             </ListItem>
             <ListItem>
               <Typography>
                 <b>Additional Category: </b>
-                {receipt.additional}
+                {receipt.additionalInformation}
               </Typography>
             </ListItem>
           </ul>

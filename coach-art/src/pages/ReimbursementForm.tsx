@@ -30,6 +30,7 @@ const ReimbursementForm: React.FC = () => {
       activityCategory: "",
       itemsPurchasedDescription: "",
       additionalInformation: "",
+      cost: 0,
     },
   ]);
 
@@ -50,6 +51,7 @@ const ReimbursementForm: React.FC = () => {
         activityCategory: "",
         itemsPurchasedDescription: "",
         additionalInformation: "",
+        cost: 0,
       },
     ]);
     console.log(receiptCount + 1);
@@ -122,7 +124,6 @@ const ReimbursementForm: React.FC = () => {
             quis lectus nulla at volutpat diam ut venenatis tellus.
           </Typography>
 
-          {/**INSERT COMPONENT OF USER INFO LIKE NAME ADDRESS ETC */}
           <Box sx={{ marginTop: "1%" }}>
             <UserInfo
               data={userData || {}}

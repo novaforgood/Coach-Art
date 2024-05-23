@@ -1,6 +1,6 @@
 // FormComponent.tsx
 import React, { useState } from "react";
-import { Button, Typography, Box } from "@mui/material";
+import { Button, Typography, Box, TextField } from "@mui/material";
 import DropdownSelect from "./Dropdown.tsx";
 import TextInput from "../TextInput.tsx";
 
@@ -17,6 +17,7 @@ const FormComponent = ({ data, onDataChange }) => {
   const [textInputValue, setTextInputValue] = useState(
     data.additionalInformation || ""
   );
+  const [cost, setCost] = useState(data.cost || "");
 
   const handleExpenseCategoryChange = (event) => {
     setExpenseCategory(event.target.value);
@@ -36,6 +37,11 @@ const FormComponent = ({ data, onDataChange }) => {
   const handleTextInputChange = (event) => {
     setTextInputValue(event.target.value);
     onDataChange({ ...data, additionalInformation: event.target.value });
+  };
+
+  const handleCostChange = (event) => {
+    setCost(event.target.value);
+    onDataChange({ ...data, cost: event.target.value });
   };
 
   const expenseCategoryOptions = [
@@ -154,6 +160,18 @@ const FormComponent = ({ data, onDataChange }) => {
             rows={8}
           />
         </Box>
+      </Box>
+      <Box sx={{ display: "flex", alignItems: "center", padding: "1%" }}>
+        <Typography sx={{ marginRight: 2 }}>Receipt Amount:</Typography>
+        <TextField
+          hiddenLabel
+          variant="filled"
+          margin="normal"
+          size="small"
+          placeholder="Enter total cost"
+          sx={{ width: "150px" }} // or '10ch' for a character-based width
+          onChange={handleCostChange}
+        />
       </Box>
     </Box>
   );

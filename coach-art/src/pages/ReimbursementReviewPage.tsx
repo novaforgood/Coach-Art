@@ -1,5 +1,6 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { write } from "../firebase.tsx";
 import ReceiptCard from "../components/ReimbursementForm/ReceiptCard.tsx";
 import ReimbursementDetails from "../components/ReimbursementForm/ReimbursementDetails.tsx";
 import { Box, Typography, Button } from "@mui/material";
@@ -7,10 +8,43 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Header from "../components/Header.tsx";
 import "../styles/global.css";
 
+interface Receipt {
+  activityCategory: string;
+  additionalInformation: string;
+  cost: string;
+  expenseCategory: string;
+  id: string;
+  itemsPurchasedDescription: string;
+}
+interface User {
+  name: string;
+  email: string;
+  streetAddress: string;
+  aptSuite: string;
+  city: string;
+  state: string;
+}
+
 const ReimbursementReview: React.FC = () => {
   const location = useLocation();
-  const { userData, receiptData } = location.state;
+  const {
+    userData,
+    receiptData,
+  }: { receiptData: { [key: string]: Receipt }; userData: any } =
+    location.state;
+  const navigate = useNavigate();
 
+  const [currentDate, setCurrentDate] = useState(getDate());
+
+  function getDate() {
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+    const date = today.getDate();
+    return `${month}/${date}/${year}`;
+  }
+
+  /*
   const receipts = [
     {
       id: 1,
@@ -45,12 +79,28 @@ const ReimbursementReview: React.FC = () => {
       additional: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
     },
   ];
+  */
+  const handleSubmit = async () => {
+    try {
+      write("reimbursementRequests/" + userData.id, {
+        userData,
+        receiptData,
+      });
+      navigate("/reimbursement-confirmation");
+    } catch (error) {
+      console.error("Write to firebase failed: ", error);
+    }
+  };
 
-  const grandTotal = receipts.reduce(
-    (total, receipt) => total + receipt.total,
+  const grandTotal = Object.values(receiptData.receipts).reduce(
+    (total, receipt: Receipt) => {
+      const cost = receipt.cost ? Number(receipt.cost) : 0;
+      total += cost;
+      return total;
+    },
     0
   );
-  const numReceipts = receipts.length;
+  const numReceipts = Object.values(receiptData.receipts).length;
 
   const h2 = {
     fontSize: "24px",
@@ -125,21 +175,26 @@ const ReimbursementReview: React.FC = () => {
             >
               {Object.values(receiptData.receipts).map(
                 (receipt: any, index) => (
-                  <Box key={receipt.id} sx={{ marginBottom: "16px" }}>
-                    <Typography>Receipt {index + 1}</Typography>
-                    <Typography>
-                      Expense Category: {receipt.expenseCategory}
-                    </Typography>
-                    <Typography>
-                      Activity Category: {receipt.activityCategory}
-                    </Typography>
-                    <Typography>
-                      Items Purchased: {receipt.itemsPurchasedDescription}
-                    </Typography>
-                    <Typography>
-                      Additional Information: {receipt.additionalInformation}
-                    </Typography>
-                  </Box>
+                  // <Box key={receipt.id} sx={{ marginBottom: "16px" }}>
+                  //   <Typography>Receipt {index + 1}</Typography>
+                  //   <Typography>
+                  //     Expense Category: {receipt.expenseCategory}
+                  //   </Typography>
+                  //   <Typography>
+                  //     Activity Category: {receipt.activityCategory}
+                  //   </Typography>
+                  //   <Typography>
+                  //     Items Purchased: {receipt.itemsPurchasedDescription}
+                  //   </Typography>
+                  //   <Typography>
+                  //     Additional Information: {receipt.additionalInformation}
+                  //   </Typography>
+                  // </Box>
+                  <ReceiptCard
+                    key={receipt.id}
+                    receipt={receipt}
+                    receiptNum={index + 1}
+                  />
                 )
               )}
             </Box>
@@ -147,28 +202,30 @@ const ReimbursementReview: React.FC = () => {
           <Box sx={{ width: "400px" }}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography style={h2}>
-                <b> Grand Total: </b> ${grandTotal.toFixed(2)}
+                <b> Grand Total: </b> ${Number(grandTotal).toFixed(2)}
               </Typography>
               <Typography style={p}>
                 <i>{numReceipts} Receipts</i>
               </Typography>
             </Box>
             <Typography style={p}>
-              <b>Date: </b> MM/DD/YY
+              <b>Date: </b> {currentDate}
             </Typography>
             <ReimbursementDetails
               reimbursement={{
-                name: "John Doe",
-                email: "john@gmail.com",
-                streetAddress: "51 Ashford Drive",
-                zip: "22042",
-                city: "Falls Church",
-                state: "VA",
+                name: userData.name,
+                email: userData.email,
+                streetAddress: userData.streetAddress,
+                zip: "90024",
+                city: userData.city,
+                state: userData.state,
                 paymentMethod: "paperCheck",
               }}
             />
             <Box style={{ display: "flex" }}>
-              <Button sx={submitButton}>Submit Receipt(s)</Button>
+              <Button sx={submitButton} onClick={handleSubmit}>
+                Submit Receipt(s)
+              </Button>
               <Button sx={editDetailButton}>Edit Details</Button>
             </Box>
           </Box>
