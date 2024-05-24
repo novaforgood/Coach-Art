@@ -1,10 +1,13 @@
 import React from "react";
 import { Box, Typography, Button, AppBar, Toolbar, Stack } from "@mui/material";
 import FormInstr from "../components/FormInstr.tsx";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header.tsx";
 import "../styles/global.css";
 
 const LandingPage: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Header></Header>
