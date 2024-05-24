@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import { Box, TextField, Button, Link } from "@mui/material";
 import { write } from "../../firebase.tsx";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import TextInput from "../TextInput.tsx";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
+
+/*
+type AdminSignupInput = {
+  name: string;
+  email: string;
+  password: string;
+};
+*/
 
 const AdminSignup = () => {
   const [username, setUsername] = useState("");
@@ -43,22 +52,34 @@ const AdminSignup = () => {
 
   const navigate = useNavigate();
 
-  const linkDestination = allFieldsValid ? "/admin/home" : "/admin/signup";
+  const linkDestination = allFieldsValid
+    ? "/admin/confirmation"
+    : "/admin/signup";
 
-  const handleSubmit = async () => {
-    try {
-      write("admin/" + email, {
-        firstName: firstName,
-        lastName: lastName,
-        password: password,
-        email: email,
-        username: username,
-      });
-      if (allFieldsValid) {
-        navigate("/admin/home");
-      }
-    } catch {
-      console.log("error writing to firebase");
+  const auth = getAuth();
+
+  const handleSubmit = () => {
+    if (allFieldsValid) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          try {
+            console.log("email is", email);
+            write("admin/" + userCredential.user.uid, {
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              username: username,
+              approved: "pending",
+            });
+            navigate("/admin/confirmation");
+            //logadmin?
+          } catch (error) {
+            console.error("Write to firebase failed: ", error);
+          }
+        })
+        .catch((error) => {
+          console.error("createUserWithEmailAndPassword failed:", error);
+        });
     }
   };
 

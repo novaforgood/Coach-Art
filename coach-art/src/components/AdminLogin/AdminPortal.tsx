@@ -1,17 +1,33 @@
 import React, { useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import { Box, TextField, Button, Link } from "@mui/material";
 import TextInput from "../TextInput.tsx";
 import Typography from "@mui/material/Typography";
 
 const AdminPortal = () => {
-  const [username, setUsername] = useState("");
+  const auth = getAuth();
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        //todo: check approval etc
+        navigate("/admin/home");
+      })
+      .catch((error) => {
+        console.error("error signInWithEmailAndPassword", error);
+      });
   };
 
   return (
@@ -65,9 +81,9 @@ const AdminPortal = () => {
           variant="filled"
           margin="normal"
           size="small"
-          placeholder="Username"
+          placeholder="Email"
           fullWidth
-          onChange={handleUsernameChange}
+          onChange={handleEmailChange}
         />
         <TextField
           hiddenLabel
@@ -111,6 +127,7 @@ const AdminPortal = () => {
             backgroundColor: "#5c5e60",
             borderColor: "black",
           }}
+          onClick={handleSubmit}
         >
           <Link
             href="/admin/home" // TODO: rename/update
