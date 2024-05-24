@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, TextField, Button, Link } from "@mui/material";
+import { write } from "../../firebase.tsx";
 import TextInput from "../TextInput.tsx";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
@@ -44,10 +45,20 @@ const AdminSignup = () => {
 
   const linkDestination = allFieldsValid ? "/admin/home" : "/admin/signup";
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (allFieldsValid) {
-      navigate("/admin/home");
+  const handleSubmit = async () => {
+    try {
+      write("admin/" + email, {
+        firstName: firstName,
+        lastName: lastName,
+        password: password,
+        email: email,
+        username: username,
+      });
+      if (allFieldsValid) {
+        navigate("/admin/home");
+      }
+    } catch {
+      console.log("error writing to firebase");
     }
   };
 
@@ -170,6 +181,7 @@ const AdminSignup = () => {
             backgroundColor: "#5c5e60",
             borderColor: "black",
           }}
+          onClick={handleSubmit}
         >
           <Link href={linkDestination} underline="none" color="inherit">
             <Typography
