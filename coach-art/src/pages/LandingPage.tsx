@@ -45,6 +45,7 @@ const LandingPage: React.FC = () => {
               </ol>
             </Typography>
           }
+          nav="/reimbursement"
         />
         <FormInstr
           header="Supply Request Form"
@@ -69,6 +70,7 @@ const LandingPage: React.FC = () => {
               </ol>
             </Typography>
           }
+          nav="/supply-review"
         />
       </Box>
     </>

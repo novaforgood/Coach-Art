@@ -1,7 +1,10 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-export default function FormInstr({ header, body }) {
+export default function FormInstr({ header, body, nav }) {
+  const navigate = useNavigate();
+
   return (
     <Box
       display="flex"
@@ -19,7 +22,13 @@ export default function FormInstr({ header, body }) {
           {header}
         </Typography>
         <Typography variant="body1">{body}</Typography>
-        <Button style={{ backgroundColor: "#b3b3b3" }} variant="contained">
+        <Button
+          style={{ backgroundColor: "#b3b3b3" }}
+          variant="contained"
+          onClick={() => {
+            navigate(nav);
+          }}
+        >
           Begin
         </Button>
       </Box>

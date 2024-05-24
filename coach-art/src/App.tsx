@@ -9,6 +9,7 @@ import AdminDashboardPage from "./pages/Admin/AdminDashboardPage.tsx";
 import ResetPasswordPage from "./pages/ResetPasswordPage.tsx";
 import ReimbursementReview from "./pages/ReimbursementReviewPage.tsx";
 import SupplyReview from "./pages/SupplyReviewPage.tsx";
+import ReimbursementConfirmation from "./pages/ReimbursementConfirmation.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
 import AdminConfirmationPage from "./pages/Admin/AdminConfirmationPage.tsx";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -43,6 +44,10 @@ const App: React.FC = () => {
           <Route path="/admin/confirmation" Component={AdminConfirmationPage} />
           <Route path="/review" Component={ReimbursementReview} />
           <Route path="/supply-review" Component={SupplyReview} />
+          <Route
+            path="/reimbursement-confirmation"
+            Component={ReimbursementConfirmation}
+          />
           <Route path="/" Component={LandingPage} />
         </Routes>
       </Router>

@@ -1,15 +1,37 @@
 // ReimbursementForm.tsx
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, Button } from "@mui/material";
+import { v4 as uuidv4 } from "uuid";
 import FormComponent from "../components/ReimbursementForm/FormComponent.tsx";
 import ReceiptCount from "../components/ReimbursementForm/ReceiptCount.tsx";
 import Typography from "@mui/material/Typography";
 import Header from "../components/Header.tsx";
+import UserInfo from "../components/ReimbursementForm/UserInfo.tsx";
 
 const ReimbursementForm: React.FC = () => {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState<any>({
+    id: uuidv4(),
+    name: "",
+    email: "",
+    streetAddress: "",
+    aptSuite: "",
+    city: "",
+    state: "",
+  });
   const [receiptCount, setReceiptCount] = useState(1);
-  const [activeReceiptIndex, setActiveReceiptIndex] = useState(1);
-  const [formData, setFormData] = useState<Array<any>>([{}]);
+  const [activeReceiptIndex, setActiveReceiptIndex] = useState(0); //was 1 CHANGED
+  const [formData, setFormData] = useState<Array<any>>([
+    {
+      id: uuidv4(),
+      expenseCategory: "",
+      activityCategory: "",
+      itemsPurchasedDescription: "",
+      additionalInformation: "",
+      cost: 0,
+    },
+  ]);
 
   const receiptCountArray = Array.from(
     { length: receiptCount },
@@ -18,21 +40,47 @@ const ReimbursementForm: React.FC = () => {
 
   const handleAddReceipt = () => {
     setReceiptCount(receiptCount + 1);
-    setActiveReceiptIndex(receiptCount + 1);
-    setFormData([...formData, {}]);
+    //setActiveReceiptIndex(receiptCount + 1); CHANGED
+    setActiveReceiptIndex(receiptCount);
+    setFormData([
+      ...formData,
+      {
+        id: uuidv4(),
+        expenseCategory: "",
+        activityCategory: "",
+        itemsPurchasedDescription: "",
+        additionalInformation: "",
+        cost: 0,
+      },
+    ]);
     console.log(receiptCount + 1);
   };
 
   const handleChangeReceipt = (index) => {
-    setActiveReceiptIndex(index + 1);
+    setActiveReceiptIndex(index); //CHANGED from index + 1
     console.log(index + 1);
+  };
+  const handleUserInfoChange = (newData) => {
+    setUserData(newData);
+    console.log(userData);
   };
 
   const handleFormChange = (index, newData) => {
     const updatedFormData = [...formData];
-    updatedFormData[index] = newData;
+    updatedFormData[index] = { ...updatedFormData[index], ...newData };
     setFormData(updatedFormData);
     console.log(formData[activeReceiptIndex]);
+  };
+
+  const handleSubmit = () => {
+    const receiptData = {
+      receipts: formData.reduce((acc, receipt) => {
+        acc[receipt.id] = receipt; //need id
+        return acc;
+      }, {}),
+    };
+
+    navigate("/review", { state: { userData, receiptData } });
   };
 
   return (
@@ -66,6 +114,13 @@ const ReimbursementForm: React.FC = () => {
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Semper
             quis lectus nulla at volutpat diam ut venenatis tellus.
           </Typography>
+
+          <Box sx={{ marginTop: "1%" }}>
+            <UserInfo
+              data={userData || {}}
+              onDataChange={(newData) => handleUserInfoChange(newData)}
+            />
+          </Box>
         </Box>
         <Box sx={{ marginTop: "1%" }}>
           <Box sx={{ display: "flex", flexDirection: "row" }}>
@@ -91,6 +146,9 @@ const ReimbursementForm: React.FC = () => {
         </Box>
         <Button sx={{ textTransform: "none" }} onClick={handleAddReceipt}>
           Add Receipt
+        </Button>
+        <Button sx={{ textTransform: "none" }} onClick={handleSubmit}>
+          Review
         </Button>
       </Box>
     </>
