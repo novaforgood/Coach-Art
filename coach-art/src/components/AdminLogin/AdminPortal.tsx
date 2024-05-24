@@ -29,7 +29,6 @@ const AdminPortal = () => {
         console.error("error signInWithEmailAndPassword", error);
       });
   };
-
   return (
     <Box
       sx={{
