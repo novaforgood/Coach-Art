@@ -42,7 +42,7 @@ export async function read(location: string) {
       console.log("No data");
     }
   } catch (error) {
-    console.error(error);
+    console.error("read function", error);
   }
   return null;
 }

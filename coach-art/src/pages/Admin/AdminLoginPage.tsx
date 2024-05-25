@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import { Box, Button } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import AdminPortal from '../../components/AdminLogin/AdminPortal.tsx';
+import React, { useState } from "react";
+import { Box, Button } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import AdminPortal from "../../components/AdminLogin/AdminPortal.tsx";
+import Header from "../../components/Header.tsx";
 
 const AdminLoginPage: React.FC = () => {
   // const [username, setUsername] = useState('');
@@ -9,36 +10,27 @@ const AdminLoginPage: React.FC = () => {
   // const [data, setData] = useState([username, password]);
 
   // const handleDataChange = (newData) => {
-    
+
   // }
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '55vh',
-        marginBottom: '3%',
-        borderRadius: '0 5px 5px 5px',
-      }}
-    >
+    <>
+      <Header></Header>
       <Box
         sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '3vh',
-        backgroundColor: '#f0f0f0',
-        padding: '2%',
-        marginBottom: '3%',
-      }}
+          display: "flex",
+          flexDirection: "column",
+          height: "55vh",
+          marginBottom: "3%",
+          borderRadius: "0 5px 5px 5px",
+        }}
       >
-        <Typography fontSize="16px" fontWeight="400" lineHeight={1.5}>COACHART</Typography>
+        <AdminPortal
+        // data={data}
+        // onDataChange={(newData) => handleDataChange(newData)}
+        />
       </Box>
-    <AdminPortal
-      // data={data}
-      // onDataChange={(newData) => handleDataChange(newData)}
-    />
-    </Box>
+    </>
   );
 };
 
