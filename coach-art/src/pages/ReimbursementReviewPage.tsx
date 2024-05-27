@@ -15,14 +15,16 @@ interface Receipt {
   expenseCategory: string;
   id: string;
   itemsPurchasedDescription: string;
+  uri: string;
 }
 interface User {
   name: string;
   email: string;
   streetAddress: string;
-  aptSuite: string;
+  zipCode: string;
   city: string;
   state: string;
+  date: string;
 }
 
 const ReimbursementReview: React.FC = () => {
@@ -216,7 +218,7 @@ const ReimbursementReview: React.FC = () => {
                 name: userData.name,
                 email: userData.email,
                 streetAddress: userData.streetAddress,
-                zip: "90024",
+                zip: userData.zipCode,
                 city: userData.city,
                 state: userData.state,
                 paymentMethod: "paperCheck",

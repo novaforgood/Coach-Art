@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button, IconButton } from "@mui/material";
+import GetAppIcon from "@mui/icons-material/GetApp";
 import RequestDocument from "./RequestDocument.tsx";
-import { PDFViewer } from "@react-pdf/renderer";
+import { PDFViewer, PDFDownloadLink } from "@react-pdf/renderer";
 
 const ReimbursementDetails = ({ request }) => {
   return (
@@ -32,10 +33,42 @@ const ReimbursementDetails = ({ request }) => {
       <Typography variant="h5" gutterBottom>
         Reimbursement Details
       </Typography>
-      <Typography variant="body1">INSERT PDF HERE !</Typography>
-      <PDFViewer>
-        <RequestDocument />
+      <PDFViewer width="500" height="325">
+        <RequestDocument request={request} />
       </PDFViewer>
+      <PDFDownloadLink
+        document={<RequestDocument request={request} />}
+        fileName="invoice.pdf"
+      >
+        <Box
+          sx={{
+            margin: "10px",
+            color: "#333",
+            "&:hover": {
+              backgroundColor: "transparent",
+              color: "#555",
+            },
+          }}
+        >
+          <Button
+            sx={{
+              width: "80%",
+              // height: '10%',
+              fontSize: "1.5rem",
+              borderRadius: "50px",
+              borderWidth: "2px",
+              color: "black",
+              alignSelf: "center",
+              padding: "4%",
+              marginBottom: "2%",
+              marginTop: "2%",
+            }}
+          >
+            <GetAppIcon />
+            Download
+          </Button>
+        </Box>
+      </PDFDownloadLink>
       {/*<RequestDocument />*/}
     </Box>
   );
