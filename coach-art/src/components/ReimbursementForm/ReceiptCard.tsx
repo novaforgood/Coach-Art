@@ -10,6 +10,7 @@ interface ReceiptCardProps {
     activityCategory: string;
     itemsPurchasedDescription: string;
     additionalInformation: string;
+    uri: string;
   };
   receiptNum;
 }
@@ -67,7 +68,8 @@ const ReceiptCard: React.FC<ReceiptCardProps> = ({ receipt, receiptNum }) => {
     <div className="receipt-card" style={cardStyle}>
       <div style={{ display: "flex" }}>
         <img
-          src="https://via.placeholder.com/180"
+          //src="https://via.placeholder.com/180"
+          src={receipt.uri}
           alt="receipt"
           style={{
             marginRight: "25px",

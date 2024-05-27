@@ -16,9 +16,10 @@ const ReimbursementForm: React.FC = () => {
     name: "",
     email: "",
     streetAddress: "",
-    aptSuite: "",
+    zipCode: "",
     city: "",
     state: "",
+    date: "",
   });
   const [receiptCount, setReceiptCount] = useState(1);
   const [activeReceiptIndex, setActiveReceiptIndex] = useState(0); //was 1 CHANGED

@@ -6,9 +6,20 @@ const UserInfo = ({ data, onDataChange }) => {
   const [name, setName] = useState(data.name || "");
   const [email, setEmail] = useState(data.email || "");
   const [streetAddress, setStreetAddress] = useState(data.streetAddress || "");
-  const [aptSuite, setAptSuite] = useState(data.aptSuite || "");
+  const [zipCode, setZipCode] = useState(data.zipCode || "");
   const [city, setCity] = useState(data.city || "");
   const [state, setState] = useState(data.state || "");
+  const [date, setDate] = useState(getDate());
+
+  function getDate() {
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+    const date = today.getDate();
+    return `${month}/${date}/${year}`;
+  }
+
+  data.date = date;
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -25,9 +36,9 @@ const UserInfo = ({ data, onDataChange }) => {
     onDataChange({ ...data, streetAddress: event.target.value });
   };
 
-  const handleAptSuiteChange = (event) => {
-    setAptSuite(event.target.value);
-    onDataChange({ ...data, aptSuite: event.target.value });
+  const handleZipCodeChange = (event) => {
+    setZipCode(event.target.value);
+    onDataChange({ ...data, zipCode: event.target.value });
   };
 
   const handleCityChange = (event) => {
@@ -38,6 +49,11 @@ const UserInfo = ({ data, onDataChange }) => {
   const handleStateChange = (event) => {
     setState(event.target.value);
     onDataChange({ ...data, state: event.target.value });
+  };
+
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
+    onDataChange({ ...data, date: event.target.value });
   };
 
   return (
@@ -112,7 +128,7 @@ const UserInfo = ({ data, onDataChange }) => {
           />
         </Box>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography sx={{ flex: 1 }}>Apt/Suite (optional):</Typography>
+          <Typography sx={{ flex: 1 }}>Zip Code:</Typography>
           <TextField
             hiddenLabel
             variant="filled"
@@ -120,7 +136,7 @@ const UserInfo = ({ data, onDataChange }) => {
             size="small"
             placeholder="Apt, suite, etc"
             sx={{ flex: 2 }}
-            onChange={handleAptSuiteChange}
+            onChange={handleZipCodeChange}
           />
         </Box>
       </Box>

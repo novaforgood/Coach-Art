@@ -1,5 +1,6 @@
 // FormComponent.tsx
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import ImageFileResizer from "react-image-file-resizer";
 import { Button, Typography, Box, TextField } from "@mui/material";
 import DropdownSelect from "./Dropdown.tsx";
 import TextInput from "../TextInput.tsx";
@@ -18,6 +19,10 @@ const FormComponent = ({ data, onDataChange }) => {
     data.additionalInformation || ""
   );
   const [cost, setCost] = useState(data.cost || "");
+
+  const [receiptImage, setReceiptImage] = useState<File>(
+    data.receiptImage || null
+  );
 
   const handleExpenseCategoryChange = (event) => {
     setExpenseCategory(event.target.value);
@@ -42,6 +47,35 @@ const FormComponent = ({ data, onDataChange }) => {
   const handleCostChange = (event) => {
     setCost(event.target.value);
     onDataChange({ ...data, cost: event.target.value });
+  };
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const resizeFile = (file: File): Promise<string> =>
+    new Promise((resolve) => {
+      ImageFileResizer.imageFileResizer(
+        file,
+        300, // max width
+        300, // max height
+        "jpeg", // output format
+        20, // quality
+        0, // rotation
+        (uri) => {
+          resolve(uri as string);
+        },
+        "base64"
+      );
+    });
+
+  const handleReceiptImageChange = async (event) => {
+    const file = event.target.files[0];
+    const resizedImage = await resizeFile(file);
+    //setReceiptImage(resizedImage);
+    onDataChange({ ...data, uri: resizedImage });
+  };
+
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
   };
 
   const expenseCategoryOptions = [
@@ -76,6 +110,13 @@ const FormComponent = ({ data, onDataChange }) => {
         borderRadius: "0 5px 5px 5px",
       }}
     >
+      <input
+        type="file"
+        ref={fileInputRef}
+        hidden
+        onChange={handleReceiptImageChange}
+        accept="image/x-png,image/jpg,image/jpeg"
+      />
       <Button
         variant="outlined"
         sx={{
@@ -93,15 +134,11 @@ const FormComponent = ({ data, onDataChange }) => {
             borderColor: "black",
           },
         }}
+        onClick={handleButtonClick}
       >
         Upload Receipt
-        <input
-          type="file"
-          hidden
-          //onChange={onFileChange}
-          accept="image/x-png,image/jpg,image/jpeg"
-        />
       </Button>
+
       <Box
         id="hello"
         sx={{
@@ -169,6 +206,7 @@ const FormComponent = ({ data, onDataChange }) => {
           margin="normal"
           size="small"
           placeholder="Enter total cost"
+          value={cost}
           sx={{ width: "150px" }} // or '10ch' for a character-based width
           onChange={handleCostChange}
         />

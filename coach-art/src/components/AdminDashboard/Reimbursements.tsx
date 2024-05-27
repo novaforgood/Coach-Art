@@ -78,7 +78,7 @@ const ReimbursementItem = ({ reimbursement, index }) => {
         //align="center"
         color="black"
       >
-        {reimbursement.request}
+        {"reimbursement"}
       </Typography>
       <Typography
         sx={{ flex: 1, marginLeft: "2%" }}
@@ -88,7 +88,7 @@ const ReimbursementItem = ({ reimbursement, index }) => {
         //align="center"
         color="black"
       >
-        {reimbursement.date}
+        {reimbursement.userData.date}
       </Typography>
     </Box>
     //</Button>
@@ -125,10 +125,10 @@ const Reimbursements = ({ reimbursements }) => {
             onClick={handleBackClick}
             sx={{
               margin: "10px",
-              color: "#333", // Dark gray text
+              color: "#333",
               "&:hover": {
-                backgroundColor: "transparent", // No background on hover
-                color: "#555", // Slightly lighter gray text on hover
+                backgroundColor: "transparent",
+                color: "#555",
               },
             }}
           >
