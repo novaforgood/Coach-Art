@@ -81,7 +81,7 @@ const SupplyReview: React.FC = () => {
 
   return (
     <>
-      <Header></Header>
+      <Header admin=""></Header>
       <Box style={{ margin: 100, marginTop: 80 }}>
         <Typography
           style={{

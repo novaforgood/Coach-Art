@@ -7,7 +7,7 @@ import Header from "../../components/Header.tsx";
 const AdminConfirmationPage: React.FC = () => {
   return (
     <>
-      <Header></Header>
+      <Header admin=""></Header>
       <FormInstr
         header="Admin Request Submitted"
         body={
@@ -17,6 +17,7 @@ const AdminConfirmationPage: React.FC = () => {
           </Typography>
         }
         nav={"/"}
+        buttonLabel="Return Home"
       />
     </>
   );

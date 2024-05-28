@@ -101,29 +101,26 @@ const RequestDocument = ({ request }: { request: Request }) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* Requester Details Table */}
         <View style={styles.table}>
           <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Requester's Name:</Text>
+            <View style={styles.tableColHeader}>
+              <Text style={styles.tableCellHeader}>Requester's Name:</Text>
             </View>
             <View style={styles.tableCol}>
               <Text style={styles.tableCell}>{request.userData.name}</Text>
             </View>
-            <View style={styles.tableCol}></View>
           </View>
           <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Email Address:</Text>
+            <View style={styles.tableColHeader}>
+              <Text style={styles.tableCellHeader}>Email Address:</Text>
             </View>
             <View style={styles.tableCol}>
               <Text style={styles.tableCell}>{request.userData.email}</Text>
             </View>
-            <View style={styles.tableCol}></View>
           </View>
           <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Mailing Address:</Text>
+            <View style={styles.tableColHeader}>
+              <Text style={styles.tableCellHeader}>Mailing Address:</Text>
             </View>
             <View style={styles.tableCol}>
               <Text style={styles.tableCell}>
@@ -136,20 +133,17 @@ const RequestDocument = ({ request }: { request: Request }) => {
                   request.userData.zipCode}
               </Text>
             </View>
-            <View style={styles.tableCol}></View>
           </View>
           <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Date of Submission:</Text>
+            <View style={styles.tableColHeader}>
+              <Text style={styles.tableCellHeader}>Date of Submission:</Text>
             </View>
             <View style={styles.tableCol}>
               <Text style={styles.tableCell}>{request.userData.date}</Text>
             </View>
-            <View style={styles.tableCol}></View>
           </View>
         </View>
 
-        {/* Purchase Detail Header */}
         <View style={styles.section}>
           <Text style={styles.textBold}>Purchase Detail</Text>
           <Text style={styles.textSmall}>
@@ -157,7 +151,6 @@ const RequestDocument = ({ request }: { request: Request }) => {
           </Text>
         </View>
 
-        {/* Purchase Detail Table */}
         <View style={styles.table}>
           <View style={styles.tableRow}>
             <View style={styles.tableColHeader}>
@@ -177,7 +170,7 @@ const RequestDocument = ({ request }: { request: Request }) => {
               <Text style={styles.tableCellHeader}>Amount</Text>
             </View>
           </View>
-          {/* Add as many rows as needed */}
+
           {Object.values(request.receiptData.receipts).map((receipt, i) => (
             <View style={styles.tableRow} key={i}>
               <View style={styles.tableCol}>
@@ -206,7 +199,6 @@ const RequestDocument = ({ request }: { request: Request }) => {
           </View>
         </View>
 
-        {/* Initials Table */}
         <View style={styles.table}>
           <View style={styles.tableRow}>
             <View style={styles.tableCol}>

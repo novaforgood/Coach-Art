@@ -6,14 +6,6 @@ import TextInput from "../TextInput.tsx";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 
-/*
-type AdminSignupInput = {
-  name: string;
-  email: string;
-  password: string;
-};
-*/
-
 const AdminSignup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

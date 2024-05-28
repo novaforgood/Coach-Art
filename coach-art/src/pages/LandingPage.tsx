@@ -10,7 +10,7 @@ const LandingPage: React.FC = () => {
 
   return (
     <>
-      <Header></Header>
+      <Header admin=""></Header>
       <Box
         display="flex"
         flexDirection="column"
@@ -46,6 +46,7 @@ const LandingPage: React.FC = () => {
             </Typography>
           }
           nav="/reimbursement"
+          buttonLabel="Begin"
         />
         <FormInstr
           header="Supply Request Form"
@@ -71,6 +72,7 @@ const LandingPage: React.FC = () => {
             </Typography>
           }
           nav="/supply-review"
+          buttonLabel="Begin"
         />
       </Box>
     </>

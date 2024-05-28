@@ -36,12 +36,12 @@ const ReimbursementItem = ({ reimbursement, index }) => {
       }}
     >
       {/**TODO: this is just for show -- change later to reflect actual */}
-      {index % 2 != 0 ? (
+      {index * 2 == 99999 ? (
         <CheckBoxIcon sx={{ marginRight: "2%" }} fontSize="small" />
       ) : (
         <CheckBoxOutlineBlankIcon sx={{ marginRight: "2%" }} fontSize="small" />
       )}
-      {index % 2 == 0 ? (
+      {index * 2 != 999999 ? (
         <BookmarkBorderOutlinedIcon
           sx={{ marginRight: "2%" }}
           fontSize="small"

@@ -17,7 +17,7 @@ const AdminSignupPage: React.FC = () => {
 
   return (
     <>
-      <Header></Header>
+      <Header admin=""></Header>
       <Box
         sx={{
           display: "flex",

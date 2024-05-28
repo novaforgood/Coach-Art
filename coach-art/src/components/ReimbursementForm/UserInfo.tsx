@@ -134,7 +134,7 @@ const UserInfo = ({ data, onDataChange }) => {
             variant="filled"
             margin="normal"
             size="small"
-            placeholder="Apt, suite, etc"
+            placeholder="90024"
             sx={{ flex: 2 }}
             onChange={handleZipCodeChange}
           />
