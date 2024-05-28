@@ -46,42 +46,6 @@ const ReimbursementReview: React.FC = () => {
     return `${month}/${date}/${year}`;
   }
 
-  /*
-  const receipts = [
-    {
-      id: 1,
-      total: 100.02,
-      expense: "Expense #1",
-      activity: "Activity #1",
-      item: "Sock",
-      additional: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-    },
-    {
-      id: 2,
-      total: 122.33,
-      expense: "Expense #1",
-      activity: "Activity #1",
-      item: "Shoe",
-      additional: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-    },
-    {
-      id: 3,
-      total: 100.0,
-      expense: "Expense #1",
-      activity: "Activity #1",
-      item: "Glove",
-      additional: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-    },
-    {
-      id: 4,
-      total: 100.99,
-      expense: "Expense #1",
-      activity: "Activity #1",
-      item: "Mitten",
-      additional: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-    },
-  ];
-  */
   const handleSubmit = async () => {
     try {
       write("reimbursementRequests/" + userData.id, {
@@ -149,7 +113,7 @@ const ReimbursementReview: React.FC = () => {
 
   return (
     <Box className="outer-box">
-      <Header></Header>
+      <Header admin=""></Header>
       <Box style={{ margin: 100 }}>
         <Typography
           style={{
@@ -177,21 +141,6 @@ const ReimbursementReview: React.FC = () => {
             >
               {Object.values(receiptData.receipts).map(
                 (receipt: any, index) => (
-                  // <Box key={receipt.id} sx={{ marginBottom: "16px" }}>
-                  //   <Typography>Receipt {index + 1}</Typography>
-                  //   <Typography>
-                  //     Expense Category: {receipt.expenseCategory}
-                  //   </Typography>
-                  //   <Typography>
-                  //     Activity Category: {receipt.activityCategory}
-                  //   </Typography>
-                  //   <Typography>
-                  //     Items Purchased: {receipt.itemsPurchasedDescription}
-                  //   </Typography>
-                  //   <Typography>
-                  //     Additional Information: {receipt.additionalInformation}
-                  //   </Typography>
-                  // </Box>
                   <ReceiptCard
                     key={receipt.id}
                     receipt={receipt}

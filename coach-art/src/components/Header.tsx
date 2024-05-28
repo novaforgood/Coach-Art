@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/global.css";
 import logo from "../assets/coach-art-logo.png";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -14,7 +14,12 @@ const colors = {
   tangerine: "#EA781E",
 };
 
-const Header: React.FC = () => {
+interface HeaderComponentProps {
+  admin: string;
+}
+
+const Header: React.FC<HeaderComponentProps> = ({ admin }) => {
+  const navigate = useNavigate();
   return (
     <header>
       <Box className="header" display="flex" alignItems="center">
@@ -55,10 +60,34 @@ const Header: React.FC = () => {
             Connect App
           </Typography>
         </Box>
-        <Button className="header-button">
-          <Favorite />
-          Donate
-        </Button>
+        {admin ? (
+          <Box>
+            <Button className="header-button" sx={{ marginRight: 2 }}>
+              {admin}
+            </Button>
+          </Box>
+        ) : (
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Button
+              className="header-button"
+              sx={{ marginRight: 2 }}
+              onClick={() => {
+                navigate("/admin/signup");
+              }}
+            >
+              Admin Sign-Up
+            </Button>
+            <Button
+              className="header-button"
+              sx={{ marginLeft: 2 }}
+              onClick={() => {
+                navigate("/admin");
+              }}
+            >
+              Admin Log-In
+            </Button>
+          </Box>
+        )}
       </Box>
     </header>
   );

@@ -25,52 +25,6 @@ const AdminDashboardPage: React.FC = () => {
   ];
   const [selectedFilter, setSelectedFilter] = useState(-1); // no filter selected (can only select 1 at a time)
 
-  // Dashboard Props
-  /*
-  const reimbursements = [
-    {
-      name: "Joe Bruin",
-      email: "joebruin@ucla.edu",
-      request: Request.Reimbursement,
-    },
-    {
-      name: "Josie Bruin",
-      email: "josiebruin@ucla.edu",
-      request: Request.Supply,
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@coachart.org",
-      request: Request.Reimbursement,
-    },
-    {
-      name: "Jane Doe",
-      email: "janedoe@coachart.org",
-      request: Request.Reimbursement,
-    },
-    {
-      name: "Joe Bruin",
-      email: "joebruin@ucla.edu",
-      request: Request.Reimbursement,
-    },
-    {
-      name: "Josie Bruin",
-      email: "josiebruin@ucla.edu",
-      request: Request.Supply,
-    },
-    {
-      name: "John Doe",
-      email: "johndoe@coachart.org",
-      request: Request.Reimbursement,
-    },
-    {
-      name: "Jane Doe",
-      email: "janedoe@coachart.org",
-      request: Request.Reimbursement,
-    },
-  ];
-  */
-
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["reimbursements"],
     queryFn: () => {
@@ -102,7 +56,8 @@ const AdminDashboardPage: React.FC = () => {
 
   return (
     <>
-      <Header></Header>
+      <Header admin="admin1"></Header>{" "}
+      {/**eventually pass in logged-in admin prop */}
       <Box
         sx={{
           display: "flex",
@@ -123,7 +78,7 @@ const AdminDashboardPage: React.FC = () => {
             // backgroundColor: '#f0f0f0',
             justifyContent: "space-between",
             padding: "2%",
-            marginBottom: "3%",
+            marginBottom: "6%",
           }}
         >
           <Typography fontSize="35px" fontWeight="600" lineHeight={1.5}>
@@ -145,16 +100,17 @@ const AdminDashboardPage: React.FC = () => {
             marginBottom: "3%",
           }}
         >
-          <SideBar
-            filters={filters}
-            selected={selectedFilter}
-            onChange={setSelectedFilter}
-          />
-          {/* <Box
-          sx={{marginTop: '7%'}}
-        > */}
-          <Reimbursements reimbursements={reimbursements} />
-          {/* </Box> */}
+          <Box sx={{ flex: 2, marginRight: "2%" }}>
+            <SideBar
+              filters={filters}
+              selected={selectedFilter}
+              onChange={setSelectedFilter}
+            />
+          </Box>
+
+          <Box sx={{ flex: 8, marginTop: "7%" }}>
+            <Reimbursements reimbursements={reimbursements} />
+          </Box>
         </Box>
       </Box>
     </>

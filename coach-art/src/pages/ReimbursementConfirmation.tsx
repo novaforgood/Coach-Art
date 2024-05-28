@@ -7,7 +7,7 @@ import "../styles/global.css";
 const ReimbursementConfirmation: React.FC = () => {
   return (
     <>
-      <Header></Header>
+      <Header admin=""></Header>
       <Box
         display="flex"
         flexDirection="column"
@@ -17,7 +17,6 @@ const ReimbursementConfirmation: React.FC = () => {
         width="100vw"
         marginTop="30px"
         marginLeft="30px"
-        gap="30px"
       >
         <FormInstr
           header="Thank you for submitting your reimbursement!"
@@ -28,6 +27,7 @@ const ReimbursementConfirmation: React.FC = () => {
             </Typography>
           }
           nav="/"
+          buttonLabel="Return Home"
         />
       </Box>
     </>

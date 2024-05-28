@@ -55,11 +55,11 @@ const FormComponent = ({ data, onDataChange }) => {
     new Promise((resolve) => {
       ImageFileResizer.imageFileResizer(
         file,
-        300, // max width
-        300, // max height
-        "jpeg", // output format
-        20, // quality
-        0, // rotation
+        300,
+        300,
+        "jpeg",
+        70,
+        0,
         (uri) => {
           resolve(uri as string);
         },
@@ -79,21 +79,49 @@ const FormComponent = ({ data, onDataChange }) => {
   };
 
   const expenseCategoryOptions = [
-    { label: "EC Option 1", value: "ecoption1" },
-    { label: "EC Option 2", value: "ecoption2" },
-    { label: "EC Option 3", value: "ecoption3" },
+    { label: "1:1 lesson", value: "1:1 lesson" },
+    { label: "Club", value: "Club" },
+    {
+      label: "Program Partner Scholarship",
+      value: "Program Partner Scholarship",
+    },
+    { label: "Background Check", value: "Background Check" },
+    { label: "Other", value: "Other" },
   ];
 
   const activityCategoryOptions = [
-    { label: "AC Option 1", value: "acoption1" },
-    { label: "AC Option 2", value: "acoption2" },
-    { label: "AC Option 3", value: "acoption3" },
+    { label: "Athletics", value: "Athletics" },
+    { label: "Culinary Arts", value: "Culinary Arts" },
+    { label: "Digital Arts", value: "Digital Arts" },
+    { label: "Literary Arts", value: "Literary Arts" },
+    { label: "Music", value: "Music" },
+    { label: "Performing Arts", value: "Performing Arts" },
+    { label: "Science / STEM", value: "Science / STEM" },
+    { label: "Textile Arts", value: "Textile Arts" },
+    { label: "Visual Art", value: "Visual Art" },
+    { label: "Other", value: "Other" },
   ];
 
   const itemsPurchasedOptions = [
-    { label: "IP Option 1", value: "ipoption1" },
-    { label: "IP Option 2", value: "ipoption2" },
-    { label: "IP Option 3", value: "ipoption3" },
+    {
+      label: "Groceries/Culinary Tools or Equipment",
+      value: "Groceries/Culinary Tools or Equipment",
+    },
+    { label: "Arts & Crafts", value: "Arts & Crafts" },
+    { label: "Athletic Equipment", value: "Athletic Equipment" },
+    {
+      label: "Music, Electronics, & Accessories",
+      value: "Music, Electronics, & Accessories",
+    },
+    {
+      label: "Books & Teaching Materials",
+      value: "Books & Teaching Materials",
+    },
+    {
+      label: "Parking Pass OR Pre-approved Uber/Lyft (tip not included)",
+      value: "Parking Pass OR Pre-approved Uber/Lyft (tip not included)",
+    },
+    { label: "Other", value: "Other" },
   ];
 
   return (
@@ -187,7 +215,7 @@ const FormComponent = ({ data, onDataChange }) => {
             Additional Information
           </Typography>
           <Typography fontSize="16px" fontWeight="400">
-            Please tell us more! Include name of Student(s)+ Class subject(s)
+            Please tell us more! Include name of Student(s) + Class subject(s)
           </Typography>
           <TextInput
             label="Type here"
@@ -207,7 +235,7 @@ const FormComponent = ({ data, onDataChange }) => {
           size="small"
           placeholder="Enter total cost"
           value={cost}
-          sx={{ width: "150px" }} // or '10ch' for a character-based width
+          sx={{ width: "150px" }}
           onChange={handleCostChange}
         />
       </Box>

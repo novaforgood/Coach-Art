@@ -30,7 +30,7 @@ const ReimbursementDetails = ({ request }) => {
         borderColor: "black",
       }}
     >
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         Reimbursement Details
       </Typography>
       <PDFViewer width="500" height="325">

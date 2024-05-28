@@ -7,7 +7,7 @@ import Header from "../components/Header.tsx";
 const AdminLoginPage: React.FC = () => {
   return (
     <>
-      <Header></Header>
+      <Header admin=""></Header>
       <Box>
         <AdminPortal />
       </Box>

@@ -86,8 +86,8 @@ const ReimbursementForm: React.FC = () => {
 
   return (
     <>
-      <Header></Header>
-      <Box>
+      <Header admin=""></Header>
+      <Box sx={{ padding: "3%" }}>
         <Box>
           <Typography
             fontSize="36px"
@@ -111,9 +111,9 @@ const ReimbursementForm: React.FC = () => {
             marginLeft="3%"
             lineHeight={1.5}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Semper
-            quis lectus nulla at volutpat diam ut venenatis tellus.
+            Please be sure to include ALL receipts for which you wish to be
+            reimbursed. Use the "Add Receipt" button to submit multiple
+            receipts. Accepted formats: JPG, PDF, DOC, PNG
           </Typography>
 
           <Box sx={{ marginTop: "1%" }}>
@@ -145,12 +145,31 @@ const ReimbursementForm: React.FC = () => {
             }
           />
         </Box>
-        <Button sx={{ textTransform: "none" }} onClick={handleAddReceipt}>
-          Add Receipt
-        </Button>
-        <Button sx={{ textTransform: "none" }} onClick={handleSubmit}>
-          Review
-        </Button>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            marginTop: "2%",
+            marginRight: "2.75%",
+          }}
+        >
+          <Button
+            style={{ backgroundColor: "#b3b3b3" }}
+            variant="contained"
+            sx={{ textTransform: "none", marginRight: "1%" }}
+            onClick={handleAddReceipt}
+          >
+            Add Receipt
+          </Button>
+          <Button
+            style={{ backgroundColor: "#b3b3b3" }}
+            variant="contained"
+            sx={{ textTransform: "none" }}
+            onClick={handleSubmit}
+          >
+            Review
+          </Button>
+        </Box>
       </Box>
     </>
   );

@@ -121,7 +121,7 @@ const ReimbursementDetails: React.FC<ReimbursementDetailsProps> = ({
               label="Yes"
               style={p}
             />
-            {
+            {/*
               <Box sx={{ marginLeft: "31px" }}>
                 <Typography style={p}>
                   <b>Project Manager:</b>
@@ -152,7 +152,7 @@ const ReimbursementDetails: React.FC<ReimbursementDetailsProps> = ({
                   </Select>
                 </FormControl>
               </Box>
-            }
+                  */}
             <FormControlLabel
               value="false"
               control={<Radio style={radioStyle} />}
