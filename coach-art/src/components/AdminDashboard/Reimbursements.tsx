@@ -7,6 +7,22 @@ import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import { Request } from "../../constants.tsx";
 import RequestDetails from "./RequestDetails.tsx";
 
+interface UserData {
+  city: String;
+  date: String;
+  email: String;
+  id: String;
+  name: String;
+  state: String;
+  streetAddress: String;
+  zipCode: String;
+}
+
+interface Reimbursement {
+  userData: UserData;
+  receiptData: Object;
+}
+
 const ReimbursementItem = ({ reimbursement, index }) => {
   return (
     //<Button variant="text" sx={{ width: "100%" }} onClick={handleClick}>
@@ -107,6 +123,18 @@ const Reimbursements = ({ reimbursements }) => {
     setSelectedReimbursement(null);
   };
 
+  const sortReimbursements = (a, b) => {
+    const aarr = (a as Reimbursement).userData.date
+      .split("/")
+      .map((num) => num.padStart(2, "0"));
+    const aday = parseInt(aarr[2].concat(aarr[0]).concat(aarr[1]));
+    const barr = (b as Reimbursement).userData.date
+      .split("/")
+      .map((num) => num.padStart(2, "0"));
+    const bday = parseInt(barr[2].concat(barr[0]).concat(barr[1]));
+    return bday - aday;
+  };
+
   return (
     <Box
       sx={{
@@ -145,16 +173,21 @@ const Reimbursements = ({ reimbursements }) => {
             boxSizing: "border-box",
           }}
         >
-          {Object.values(reimbursements).map((reimbursement, index) => (
-            <Button
-              key={index}
-              variant="text"
-              sx={{ width: "100%", padding: 0 }}
-              onClick={() => handleButtonClick(reimbursement)}
-            >
-              <ReimbursementItem index={index} reimbursement={reimbursement} />
-            </Button>
-          ))}
+          {Object.values(reimbursements)
+            .sort(sortReimbursements)
+            .map((reimbursement, index) => (
+              <Button
+                key={index}
+                variant="text"
+                sx={{ width: "100%", padding: 0 }}
+                onClick={() => handleButtonClick(reimbursement)}
+              >
+                <ReimbursementItem
+                  index={index}
+                  reimbursement={reimbursement}
+                />
+              </Button>
+            ))}
         </Box>
       )}
     </Box>

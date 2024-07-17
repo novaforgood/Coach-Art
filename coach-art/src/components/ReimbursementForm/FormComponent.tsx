@@ -143,7 +143,7 @@ const FormComponent = ({ data, onDataChange }) => {
         ref={fileInputRef}
         hidden
         onChange={handleReceiptImageChange}
-        accept="image/x-png,image/jpg,image/jpeg"
+        accept=".jpg, .jpeg, .pdf, .doc, .docx, .png"
       />
       <Button
         variant="outlined"

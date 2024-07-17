@@ -56,7 +56,7 @@ const AdminDashboardPage: React.FC = () => {
 
   return (
     <>
-      <Header admin="admin1"></Header>{" "}
+      <Header admin="admin"></Header>{" "}
       {/**eventually pass in logged-in admin prop */}
       <Box
         sx={{
