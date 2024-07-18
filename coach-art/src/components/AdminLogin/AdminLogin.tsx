@@ -5,7 +5,7 @@ import { Box, TextField, Button, Link } from "@mui/material";
 import TextInput from "../TextInput.tsx";
 import Typography from "@mui/material/Typography";
 
-const AdminPortal = () => {
+const AdminLogin = () => {
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -149,4 +149,4 @@ const AdminPortal = () => {
   );
 };
 
-export default AdminPortal;
+export default AdminLogin;

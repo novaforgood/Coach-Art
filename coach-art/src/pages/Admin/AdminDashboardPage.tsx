@@ -8,6 +8,7 @@ import SideBar from "../../components/AdminDashboard/SideBar.tsx";
 import Reimbursements from "../../components/AdminDashboard/Reimbursements.tsx";
 import { Request } from "../../constants.tsx";
 import Header from "../../components/Header.tsx";
+import AdminLogout from "../../components/AdminLogin/AdminLogout.tsx";
 
 const AdminDashboardPage: React.FC = () => {
   // Search Bar Props
@@ -84,6 +85,7 @@ const AdminDashboardPage: React.FC = () => {
           <Typography fontSize="35px" fontWeight="600" lineHeight={1.5}>
             Dashboard
           </Typography>
+          <AdminLogout></AdminLogout>
           <SearchBar onChange={handleSearchChange} />
         </Box>
 

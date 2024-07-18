@@ -50,3 +50,8 @@ export async function read(location: string) {
   }
   return null;
 }
+
+export async function getAdmin() {
+  return auth.currentUser?.uid; //might not need uid
+  //throw new Error("have no idea who am i");
+}
