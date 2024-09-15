@@ -13,6 +13,7 @@ const AdminSignup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [error, setError] = useState("");
 
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value);
@@ -50,28 +51,30 @@ const AdminSignup = () => {
 
   const auth = getAuth();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (allFieldsValid) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          try {
-            console.log("email is", email);
-            write("admin/" + userCredential.user.uid, {
-              firstName: firstName,
-              lastName: lastName,
-              email: email,
-              username: username,
-              approved: "pending",
-            });
-            navigate("/admin/confirmation");
-            //logadmin?
-          } catch (error) {
-            console.error("Write to firebase failed: ", error);
-          }
-        })
-        .catch((error) => {
-          console.error("createUserWithEmailAndPassword failed:", error);
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
+
+        await write("admin/" + user.uid, {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          username: username,
+          approved: "pending",
         });
+
+        console.log("User created and data written successfully");
+        navigate("/admin/confirmation");
+      } catch (error) {
+        console.error("Error during signup:", error);
+        setError("An error occurred during signup. Please try again.");
+      }
     }
   };
 
@@ -177,6 +180,11 @@ const AdminSignup = () => {
           fullWidth
           type="password" // hides password text
         />
+        {error && (
+          <Typography color="error" sx={{ mt: 2 }}>
+            {error}
+          </Typography>
+        )}
         <Button
           variant="text"
           sx={{
@@ -195,6 +203,7 @@ const AdminSignup = () => {
             borderColor: "black",
           }}
           onClick={handleSubmit}
+          disabled={!allFieldsValid}
         >
           <Link href={linkDestination} underline="none" color="inherit">
             <Typography

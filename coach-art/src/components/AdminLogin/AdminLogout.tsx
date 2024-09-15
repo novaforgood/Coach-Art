@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
-import firebase from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { Button } from "@mui/material";
+import { Button, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext.tsx";
 
-const AdminLogout = () => {
+const AdminLogout: React.FC = () => {
   const auth = getAuth();
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
+
   const handleLogout = () => {
     auth
       .signOut()
@@ -21,7 +21,41 @@ const AdminLogout = () => {
         console.error("sign out error", error);
       });
   };
-  return <Button onClick={handleLogout}>Logout</Button>;
+
+  return (
+    <Box sx={{ marginTop: "20px" }}>
+      <Button
+        onClick={handleLogout}
+        variant="text"
+        sx={{
+          width: "80%",
+          fontSize: "1.5rem",
+          borderRadius: "50px",
+          borderWidth: "2px",
+          color: "black",
+          alignSelf: "center",
+          padding: "4%",
+          marginBottom: "2%",
+          marginTop: "2%",
+          backgroundColor: "white",
+          "&:hover": {
+            backgroundColor: "#f5f5f5",
+          },
+          textTransform: "uppercase",
+        }}
+      >
+        <Typography
+          fontSize="15px"
+          fontWeight="500"
+          lineHeight={0.5}
+          align="center"
+          color="black"
+        >
+          Logout
+        </Typography>
+      </Button>
+    </Box>
+  );
 };
 
 export default AdminLogout;
