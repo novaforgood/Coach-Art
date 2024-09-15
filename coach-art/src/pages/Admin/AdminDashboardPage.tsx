@@ -85,7 +85,7 @@ const AdminDashboardPage: React.FC = () => {
           <Typography fontSize="35px" fontWeight="600" lineHeight={1.5}>
             Dashboard
           </Typography>
-          <AdminLogout></AdminLogout>
+
           <SearchBar onChange={handleSearchChange} />
         </Box>
 
@@ -108,6 +108,7 @@ const AdminDashboardPage: React.FC = () => {
               selected={selectedFilter}
               onChange={setSelectedFilter}
             />
+            <AdminLogout></AdminLogout>
           </Box>
 
           <Box sx={{ flex: 8, marginTop: "7%" }}>

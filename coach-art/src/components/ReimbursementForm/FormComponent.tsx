@@ -55,10 +55,10 @@ const FormComponent = ({ data, onDataChange }) => {
     new Promise((resolve) => {
       ImageFileResizer.imageFileResizer(
         file,
-        300,
-        300,
+        700,
+        700,
         "jpeg",
-        70,
+        100,
         0,
         (uri) => {
           resolve(uri as string);

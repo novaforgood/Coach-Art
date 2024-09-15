@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import firebase from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./AuthContext.tsx";
 
 const AdminLogout = () => {
   const auth = getAuth();
+  const authContext = useContext(AuthContext);
   const navigate = useNavigate();
   const handleLogout = () => {
     auth
       .signOut()
       .then(() => {
-        navigate("/admin"); //ERROR: saying no routes to /admin even tho there is bruh fix this
+        authContext.signOut();
+        navigate("/admin");
         console.log("Signed Out");
       })
       .catch((error) => {

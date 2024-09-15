@@ -78,32 +78,11 @@ const ReimbursementReview: React.FC = () => {
     fontSize: "16px",
   };
 
-  const editButton = {
-    padding: "0px",
-    textTransform: "none",
-    color: "#000000",
-    fontSize: "16px",
-    //fontFamily: "Inter",
-    fontWeight: "400",
-    marginTop: "20px",
-    marginBottom: "20px",
-  };
-
   const submitButton = {
     padding: "10px",
     textTransform: "none",
     color: "#FFFFFF",
     backgroundColor: "#B3B3B3",
-    fontSize: "16px",
-    //  fontFamily: "Inter",
-    fontWeight: "400",
-    marginTop: "20px",
-    marginBottom: "20px",
-  };
-  const editDetailButton = {
-    margin: "10px",
-    textTransform: "none",
-    color: "#B3B3B3",
     fontSize: "16px",
     //  fontFamily: "Inter",
     fontWeight: "400",
@@ -123,10 +102,6 @@ const ReimbursementReview: React.FC = () => {
         >
           Reimbursement Form Review
         </Typography>
-        <Button sx={editButton}>
-          <ArrowBackIcon style={{ fontSize: "20px", fontWeight: "400" }} /> Edit
-          Receipts
-        </Button>
         <Box style={{ display: "flex" }}>
           <Box style={{ width: "70%" }}>
             <Box
@@ -177,7 +152,6 @@ const ReimbursementReview: React.FC = () => {
               <Button sx={submitButton} onClick={handleSubmit}>
                 Submit Receipt(s)
               </Button>
-              <Button sx={editDetailButton}>Edit Details</Button>
             </Box>
           </Box>
         </Box>

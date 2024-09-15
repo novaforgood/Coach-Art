@@ -51,21 +51,18 @@ const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <AuthProvider>
-          {/**protected pages */}
-          <AuthIsSignedIn>
-            <Router>
+          <Router>
+            {/**protected pages */}
+            <AuthIsSignedIn>
               <Routes>
                 <Route path="/logout" element={<AdminLogout />} />
-                <Route path="/admin/home" Component={AdminDashboardPage} />
+                <Route path="/admin/home" element={<AdminDashboardPage />} />
               </Routes>
-            </Router>
-          </AuthIsSignedIn>
-          {/**unprotected pages */}
-
-          <Router>
+            </AuthIsSignedIn>
+            {/**unprotected pages */}
             <Routes>
               <Route path="/reimbursement" Component={ReimbursementForm} />
-              <Route path="/admin" Component={AdminLoginPage} />
+              <Route path="/admin" element={<AdminLoginPage />} />
               <Route path="/admin/signup" Component={AdminSignupPage} />
               <Route
                 path="/admin/resetpassword"

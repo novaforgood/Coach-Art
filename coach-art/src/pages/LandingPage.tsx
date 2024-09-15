@@ -48,32 +48,6 @@ const LandingPage: React.FC = () => {
           nav="/reimbursement"
           buttonLabel="Begin"
         />
-        <FormInstr
-          header="Supply Request Form"
-          body={
-            <Typography>
-              Please submit this form if you would like CoachArt to purchase
-              items on your behalf.
-              <ol>
-                <li>
-                  Collect links to the item(s) you would like (Amazon links are
-                  preferred).
-                </li>
-                <li>Read each question and provide complete answers.</li>
-                <li>
-                  Check the supply prices, and ensure that you are within budget
-                  for your request.
-                </li>
-                <li>
-                  Make sure to click SUBMIT on the final screen to complete the
-                  form.
-                </li>
-              </ol>
-            </Typography>
-          }
-          nav="/supply-review"
-          buttonLabel="Begin"
-        />
       </Box>
     </>
   );

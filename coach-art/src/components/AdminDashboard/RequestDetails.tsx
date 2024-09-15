@@ -38,7 +38,9 @@ const ReimbursementDetails = ({ request }) => {
       </PDFViewer>
       <PDFDownloadLink
         document={<RequestDocument request={request} />}
-        fileName="invoice.pdf"
+        fileName={
+          request.userData.date + "_" + request.userData.name + "_invoice.pdf"
+        } //"invoice.pdf"
       >
         <Box
           sx={{

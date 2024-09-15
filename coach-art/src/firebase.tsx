@@ -25,10 +25,10 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 //realtime database
-const database = getDatabase(app);
+export const database = getDatabase(app);
 
 //authentication
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 //basic operation functions
 
@@ -52,6 +52,10 @@ export async function read(location: string) {
 }
 
 export async function getAdmin() {
-  return auth.currentUser?.uid; //might not need uid
-  //throw new Error("have no idea who am i");
+  const user = auth.currentUser;
+  if (user) {
+    return user;
+  } else {
+    throw new Error("No logged-in user");
+  }
 }
