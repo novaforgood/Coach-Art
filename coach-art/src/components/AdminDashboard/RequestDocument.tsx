@@ -1,5 +1,12 @@
 import React from "react";
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  Image,
+} from "@react-pdf/renderer";
 
 interface Request {
   userData: User;
@@ -15,6 +22,7 @@ interface User {
   zipCode: string;
   date: string;
 }
+
 interface Receipt {
   activityCategory: string;
   expenseCategory: string;
@@ -22,7 +30,9 @@ interface Receipt {
   cost: string;
   additionalInformation: string;
   id: string;
+  uri: string;
 }
+
 interface ReceiptData {
   receipts: Receipt[];
 }
@@ -79,13 +89,16 @@ const styles = StyleSheet.create({
   textSmall: {
     fontSize: 10,
   },
-  totalCell: {
-    flex: 1,
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "#000",
-    padding: 5,
-    textAlign: "right",
+  totalText: {
+    marginTop: 10,
+    fontSize: 12,
+    fontWeight: "bold",
+    textDecoration: "underline",
+  },
+  receiptImage: {
+    width: "100%",
+    height: "100%",
+    objectFit: "contain",
   },
 });
 
@@ -98,6 +111,7 @@ const RequestDocument = ({ request }: { request: Request }) => {
     },
     0
   );
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -189,17 +203,13 @@ const RequestDocument = ({ request }: { request: Request }) => {
               </View>
             </View>
           ))}
-          <View style={styles.tableRow}>
-            <View style={[styles.tableCol, { flex: 3 }]}></View>
-            <View style={styles.totalCell}>
-              <Text style={styles.tableCell}>
-                Total: ${Number(grandTotal).toFixed(2)}
-              </Text>
-            </View>
-          </View>
         </View>
 
-        <View style={styles.table}>
+        <Text style={styles.totalText}>
+          Total: ${Number(grandTotal).toFixed(2)}
+        </Text>
+
+        <View style={[styles.table, { marginTop: 20 }]}>
           <View style={styles.tableRow}>
             <View style={styles.tableCol}>
               <Text style={styles.tableCell}>Employee Initials:</Text>
@@ -218,6 +228,12 @@ const RequestDocument = ({ request }: { request: Request }) => {
           </View>
         </View>
       </Page>
+      {/**receipt */}
+      {Object.values(request.receiptData.receipts).map((receipt, i) => (
+        <Page size="A4">
+          <Image src={receipt.uri} style={styles.receiptImage} />
+        </Page>
+      ))}
     </Document>
   );
 };

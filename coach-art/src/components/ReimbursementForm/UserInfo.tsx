@@ -122,7 +122,7 @@ const UserInfo = ({ data, onDataChange }) => {
             variant="filled"
             margin="normal"
             size="small"
-            placeholder="330 De Neve Dr"
+            placeholder="Street Address"
             sx={{ flex: 2 }}
             onChange={handleStreetAddressChange}
           />
@@ -134,7 +134,7 @@ const UserInfo = ({ data, onDataChange }) => {
             variant="filled"
             margin="normal"
             size="small"
-            placeholder="90024"
+            placeholder="Zip Code"
             sx={{ flex: 2 }}
             onChange={handleZipCodeChange}
           />

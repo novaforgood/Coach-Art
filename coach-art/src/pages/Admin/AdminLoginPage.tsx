@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import AdminPortal from "../../components/AdminLogin/AdminPortal.tsx";
+import AdminLogin from "../../components/AdminLogin/AdminLogin.tsx";
 import Header from "../../components/Header.tsx";
 
 const AdminLoginPage: React.FC = () => {
@@ -25,7 +25,7 @@ const AdminLoginPage: React.FC = () => {
           borderRadius: "0 5px 5px 5px",
         }}
       >
-        <AdminPortal
+        <AdminLogin
         // data={data}
         // onDataChange={(newData) => handleDataChange(newData)}
         />

@@ -1,34 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { Box, TextField, Button, Link } from "@mui/material";
-import TextInput from "../TextInput.tsx";
 import Typography from "@mui/material/Typography";
+import { read } from "../../firebase.tsx";
+import { AuthContext } from "./AuthContext.tsx";
 
-const AdminPortal = () => {
+const AdminLogin = () => {
   const auth = getAuth();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const { signIn } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  const handleEmailChange = (event) => setEmail(event.target.value);
+  const handlePasswordChange = (event) => setPassword(event.target.value);
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const adminObj = await read("admin/" + userCredential.user.uid);
+
+      if (adminObj.approved === "approved") {
+        signIn();
+        navigate("/admin/home");
+      } else if (adminObj.approved === "pending") {
+        setError("Your admin account is pending approval.");
+      } else if (adminObj.approved === "rejected") {
+        setError("Your request for admin access has been rejected.");
+      }
+    } catch (error) {
+      console.error("Error signing in:", error);
+      setError("Invalid email or password. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleSubmit = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        //todo: check approval etc
-        navigate("/admin/home");
-      })
-      .catch((error) => {
-        console.error("error signInWithEmailAndPassword", error);
-      });
-  };
   return (
     <Box
       sx={{
@@ -92,13 +111,9 @@ const AdminPortal = () => {
           placeholder="Password"
           onChange={handlePasswordChange}
           fullWidth
-          type="password" // hides password text
+          type="password"
         />
-        <Link
-          href="/admin/resetpassword" // TODO: rename/update
-          underline="always"
-          color="inherit"
-        >
+        <Link href="/admin/resetpassword" underline="always" color="inherit">
           <Typography
             fontSize="10px"
             fontWeight="100"
@@ -109,6 +124,11 @@ const AdminPortal = () => {
             Forgot Password?
           </Typography>
         </Link>
+        {error && (
+          <Typography color="error" align="center" sx={{ mt: 2 }}>
+            {error}
+          </Typography>
+        )}
         <Button
           variant="text"
           sx={{
@@ -127,26 +147,21 @@ const AdminPortal = () => {
             borderColor: "black",
           }}
           onClick={handleSubmit}
+          disabled={loading}
         >
-          <Link
-            href="/admin/home" // TODO: rename/update
-            underline="none"
-            color="inherit"
+          <Typography
+            fontSize="20px"
+            fontWeight="200"
+            lineHeight={1.5}
+            align="center"
+            color="white"
           >
-            <Typography
-              fontSize="20px"
-              fontWeight="200"
-              lineHeight={1.5}
-              align="center"
-              color="white"
-            >
-              Sign In
-            </Typography>
-          </Link>
+            {loading ? "Signing In..." : "Sign In"}
+          </Typography>
         </Button>
       </Box>
     </Box>
   );
 };
 
-export default AdminPortal;
+export default AdminLogin;

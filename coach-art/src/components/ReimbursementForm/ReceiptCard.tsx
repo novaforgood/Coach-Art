@@ -41,29 +41,6 @@ const ReceiptCard: React.FC<ReceiptCardProps> = ({ receipt, receiptNum }) => {
     margin: 0,
   };
 
-  const editButton = {
-    padding: "0px",
-    textTransform: "none",
-    color: "#000000",
-    fontSize: "16px",
-    fontFamily: "Inter",
-    fontWeight: "400",
-    minWidth: "0px",
-    marginTop: "20px",
-    marginRight: "12px",
-  };
-
-  const removeButton = {
-    padding: "0px",
-    textTransform: "none",
-    color: "#B3B3B3",
-    fontSize: "16px",
-    fontFamily: "Inter",
-    fontWeight: "400",
-    minWidth: "0px",
-    marginTop: "20px",
-  };
-
   return (
     <div className="receipt-card" style={cardStyle}>
       <div style={{ display: "flex" }}>
@@ -112,8 +89,6 @@ const ReceiptCard: React.FC<ReceiptCardProps> = ({ receipt, receiptNum }) => {
               </Typography>
             </ListItem>
           </ul>
-          <Button sx={editButton}>Edit</Button>
-          <Button sx={removeButton}>Remove</Button>
         </div>
       </div>
     </div>

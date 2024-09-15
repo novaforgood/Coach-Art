@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, set, get } from "firebase/database";
+import { getDatabase, ref, set, get, update } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -25,14 +25,14 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 //realtime database
-const database = getDatabase(app);
+export const database = getDatabase(app);
 
 //authentication
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 //basic operation functions
 
-export function write(location: string, value: unknown) {
+export async function write(location: string, value: unknown) {
   set(ref(database, location), value);
 }
 
@@ -49,4 +49,22 @@ export async function read(location: string) {
     console.error(error);
   }
   return null;
+}
+
+export async function updateData(location: string, value: any): Promise<void> {
+  try {
+    await update(ref(database, location), value);
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function getAdmin() {
+  const user = auth.currentUser;
+  if (user) {
+    return user;
+  } else {
+    throw new Error("No logged-in user");
+  }
 }

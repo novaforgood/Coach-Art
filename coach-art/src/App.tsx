@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import ReimbursementForm from "./pages/ReimbursementForm.tsx";
 import AdminLoginPage from "./pages/Admin/AdminLoginPage.tsx";
 import AdminSignupPage from "./pages/Admin/AdminSignupPage.tsx";
@@ -13,6 +18,13 @@ import AdminConfirmationPage from "./pages/Admin/AdminConfirmationPage.tsx";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PDFViewer } from "@react-pdf/renderer";
+
+import AdminLogin from "./components/AdminLogin/AdminLogin.tsx";
+import AdminLogout from "./components/AdminLogin/AdminLogout.tsx";
+import AuthProvider, {
+  AuthIsNotSignedIn,
+  AuthIsSignedIn,
+} from "./components/AdminLogin/AuthContext.tsx";
 
 const queryClient = new QueryClient();
 
@@ -38,26 +50,38 @@ const App: React.FC = () => {
     //<PDFViewer>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <Router>
-          <Routes>
-            <Route path="/reimbursement" Component={ReimbursementForm} />
-            <Route path="/admin" Component={AdminLoginPage} />
-            <Route path="/admin/home" Component={AdminDashboardPage} />
-            <Route path="/admin/signup" Component={AdminSignupPage} />
-            <Route path="/admin/resetpassword" Component={ResetPasswordPage} />
-            <Route
-              path="/admin/confirmation"
-              Component={AdminConfirmationPage}
-            />
-            <Route path="/review" Component={ReimbursementReview} />
-            <Route path="/supply-review" Component={SupplyReview} />
-            <Route
-              path="/reimbursement-confirmation"
-              Component={ReimbursementConfirmation}
-            />
-            <Route path="/" Component={LandingPage} />
-          </Routes>
-        </Router>
+        <AuthProvider>
+          <Router>
+            {/**protected pages */}
+            <AuthIsSignedIn>
+              <Routes>
+                <Route path="/logout" element={<AdminLogout />} />
+                <Route path="/admin/home" element={<AdminDashboardPage />} />
+              </Routes>
+            </AuthIsSignedIn>
+            {/**unprotected pages */}
+            <Routes>
+              <Route path="/reimbursement" Component={ReimbursementForm} />
+              <Route path="/admin" element={<AdminLoginPage />} />
+              <Route path="/admin/signup" Component={AdminSignupPage} />
+              <Route
+                path="/admin/resetpassword"
+                Component={ResetPasswordPage}
+              />
+              <Route
+                path="/admin/confirmation"
+                Component={AdminConfirmationPage}
+              />
+              <Route path="/review" Component={ReimbursementReview} />
+              <Route path="/supply-review" Component={SupplyReview} />
+              <Route
+                path="/reimbursement-confirmation"
+                Component={ReimbursementConfirmation}
+              />
+              <Route path="/" Component={LandingPage} />
+            </Routes>
+          </Router>
+        </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
     //</PDFViewer>
