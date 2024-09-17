@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Box, TextField, Button, Link } from "@mui/material";
 import { write } from "../../firebase.tsx";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import TextInput from "../TextInput.tsx";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 

@@ -1,10 +1,7 @@
 import React from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
-import { MenuItem } from "@mui/material";
-import { InputLabel } from "@mui/material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import FormControl from "@mui/material/FormControl";
+import { SelectChangeEvent } from "@mui/material/Select";
 
 import styled from "@emotion/styled";
 
@@ -121,38 +118,6 @@ const ReimbursementDetails: React.FC<ReimbursementDetailsProps> = ({
               label="Yes"
               style={p}
             />
-            {/*
-              <Box sx={{ marginLeft: "31px" }}>
-                <Typography style={p}>
-                  <b>Project Manager:</b>
-                </Typography>
-                <FormControl
-                  sx={{
-                    minWidth: "100%",
-                    backgroundColor: "#D9D9D9",
-                    border: "0px solid #D9D9D9",
-                    borderRadius: "50px",
-                  }}
-                  size="small"
-                >
-                  <InputLabel>Select an option from below</InputLabel>
-                  <Select
-                    value={age}
-                    label="Select an option from below"
-                    onChange={handleChange}
-                    sx={{
-                      width: "100%",
-                      border: "0px solid #D9D9D9",
-                      borderRadius: "50px",
-                    }}
-                  >
-                    <MenuItem value={10}>John Doe</MenuItem>
-                    <MenuItem value={20}>Jenny Wang</MenuItem>
-                    <MenuItem value={30}>Jason Chan</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-                  */}
             <FormControlLabel
               value="false"
               control={<Radio style={radioStyle} />}

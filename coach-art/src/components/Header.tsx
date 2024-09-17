@@ -5,8 +5,6 @@ import Typography from "@mui/material/Typography";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/global.css";
 import logo from "../assets/coach-art-logo.png";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import Favorite from "@mui/icons-material/Favorite";
 
 const colors = {
   navyBlue: "#101C52",

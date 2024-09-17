@@ -4,7 +4,6 @@ import { write } from "../firebase.tsx";
 import ReceiptCard from "../components/ReimbursementForm/ReceiptCard.tsx";
 import ReimbursementDetails from "../components/ReimbursementForm/ReimbursementDetails.tsx";
 import { Box, Typography, Button } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Header from "../components/Header.tsx";
 import "../styles/global.css";
 

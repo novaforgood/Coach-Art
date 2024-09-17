@@ -1,5 +1,5 @@
 import React, { useContext, createContext, useEffect, useState } from "react";
-import { getAdmin, auth } from "../../firebase.tsx";
+import { auth } from "../../firebase.tsx";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { ref, get } from "firebase/database";
 import { database } from "../../firebase.tsx";
@@ -28,7 +28,6 @@ type Props = {
 
 interface AdminData {
   approved: "approved" | "pending" | "rejected";
-  // TODO: add other fields
 }
 
 export const AuthContext = createContext<IAuth>(defaultState);

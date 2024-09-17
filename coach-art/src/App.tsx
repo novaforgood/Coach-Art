@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ReimbursementForm from "./pages/ReimbursementForm.tsx";
 import AdminLoginPage from "./pages/Admin/AdminLoginPage.tsx";
 import AdminSignupPage from "./pages/Admin/AdminSignupPage.tsx";
@@ -17,12 +12,9 @@ import LandingPage from "./pages/LandingPage.tsx";
 import AdminConfirmationPage from "./pages/Admin/AdminConfirmationPage.tsx";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { PDFViewer } from "@react-pdf/renderer";
 
-import AdminLogin from "./components/AdminLogin/AdminLogin.tsx";
 import AdminLogout from "./components/AdminLogin/AdminLogout.tsx";
 import AuthProvider, {
-  AuthIsNotSignedIn,
   AuthIsSignedIn,
 } from "./components/AdminLogin/AuthContext.tsx";
 

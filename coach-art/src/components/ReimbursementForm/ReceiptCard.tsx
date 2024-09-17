@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Typography } from "@mui/material";
 import styled from "@emotion/styled";
 
 interface ReceiptCardProps {

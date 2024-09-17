@@ -1,10 +1,7 @@
 import React from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
-import { MenuItem } from "@mui/material";
-import { InputLabel } from "@mui/material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import FormControl from "@mui/material/FormControl";
+import { SelectChangeEvent } from "@mui/material/Select";
 import styled from "@emotion/styled";
 
 interface SupplyDetailsProps {

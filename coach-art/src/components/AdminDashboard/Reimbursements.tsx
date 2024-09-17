@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Box, Typography, Button, IconButton } from "@mui/material";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import RequestDetails from "./RequestDetails.tsx";
 import { Reimbursement } from "../../types/index.ts";
 
