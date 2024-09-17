@@ -10,14 +10,14 @@ import { getDatabase, ref, set, get, update } from "firebase/database";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 //protect this later on
 const firebaseConfig = {
-  apiKey: "AIzaSyBAd_Dh9lgjkyli_7mMaCzCVVNoEO2BrjU",
-  authDomain: "coach-art.firebaseapp.com",
-  projectId: "coach-art",
-  storageBucket: "coach-art.appspot.com",
-  messagingSenderId: "216034756869",
-  appId: "1:216034756869:web:4a65d9b7154e3a4c4acf6c",
-  measurementId: "G-JS8EF3YCB4", //add database url !!
-  databaseURL: "https://coach-art-default-rtdb.firebaseio.com",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
 };
 
 // Initialize Firebase
