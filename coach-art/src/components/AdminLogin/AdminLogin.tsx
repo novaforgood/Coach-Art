@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { Box, TextField, Button, Link } from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { read } from "../../firebase.tsx";
 import { AuthContext } from "./AuthContext.tsx";
@@ -113,17 +113,6 @@ const AdminLogin = () => {
           fullWidth
           type="password"
         />
-        <Link href="/admin/resetpassword" underline="always" color="inherit">
-          <Typography
-            fontSize="10px"
-            fontWeight="100"
-            lineHeight={1.5}
-            align="center"
-            color="black"
-          >
-            Forgot Password?
-          </Typography>
-        </Link>
         {error && (
           <Typography color="error" align="center" sx={{ mt: 2 }}>
             {error}
