@@ -1,1 +1,1 @@
-# Coach-Art
+# Coach Art
