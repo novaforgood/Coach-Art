@@ -48,6 +48,8 @@ const ReimbursementReview: React.FC = () => {
   const handleSubmit = async () => {
     try {
       write("reimbursementRequests/" + userData.id, {
+        id: userData.id,
+        completed: false,
         userData,
         receiptData,
       });
