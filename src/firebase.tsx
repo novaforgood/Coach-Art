@@ -20,20 +20,33 @@ const firebaseConfig = {
   databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
 };
 
+console.log("firebase Config:", firebaseConfig);
+
 // Initialize Firebase
+try {
+  const app = initializeApp(firebaseConfig);
+} catch (error) {
+  console.error("Error initializing Firebase:", error);
+}
+
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
 //realtime database
 export const database = getDatabase(app);
 
 //authentication
 export const auth = getAuth(app);
-
+console.log("auth:", auth);
+console.log("current user:", auth.currentUser);
 //basic operation functions
 
 export async function write(location: string, value: unknown) {
-  set(ref(database, location), value);
+  try {
+    await set(ref(database, location), value);
+    console.log("write successful");
+  } catch (error) {
+    console.error("Error writing to database:", error);
+  }
 }
 
 export async function read(location: string) {
