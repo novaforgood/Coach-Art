@@ -13,6 +13,7 @@ const AdminSignup = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value);
@@ -50,7 +51,9 @@ const AdminSignup = () => {
 
   const auth = getAuth();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
     if (allFieldsValid) {
       try {
         const userCredential = await createUserWithEmailAndPassword(
@@ -69,11 +72,14 @@ const AdminSignup = () => {
         });
 
         console.log("User created and data written successfully");
+        setIsLoading(false);
         navigate("/admin/confirmation");
       } catch (error) {
         console.error("Error during signup:", error);
         setError("An error occurred during signup. Please try again.");
       }
+    } else {
+      setIsLoading(false);
     }
   };
 
@@ -202,7 +208,7 @@ const AdminSignup = () => {
             borderColor: "black",
           }}
           onClick={handleSubmit}
-          disabled={!allFieldsValid}
+          disabled={!allFieldsValid || isLoading}
         >
           <Link href={linkDestination} underline="none" color="inherit">
             <Typography
@@ -212,7 +218,7 @@ const AdminSignup = () => {
               align="center"
               color="white"
             >
-              Sign Up
+              {isLoading ? "Signing up..." : "Sign Up"}
             </Typography>
           </Link>
         </Button>

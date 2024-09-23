@@ -42,6 +42,7 @@ console.log("current user:", auth.currentUser);
 
 export async function write(location: string, value: unknown) {
   try {
+    console.log("attempting to write user data");
     await set(ref(database, location), value);
     console.log("write successful");
   } catch (error) {
